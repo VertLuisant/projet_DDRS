@@ -14,4 +14,11 @@ function recupData($bdd, $table, $condition="1"){
   	$data = $bdd->query("SELECT * FROM ".$table." WHERE ".$condition);
 	return $data;
 }   
+function moyenneHeur($temps){
+	$year = "2014";
+	$moi = "
+	
+	
+	
+}
 ?>
