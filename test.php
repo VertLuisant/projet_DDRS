@@ -8,6 +8,7 @@
 			include "connectBD.php";
 			
 			$bdd = connectBD();
+			/*
 			$res = recupData($bdd, "serveur_est");
 			while ($donnees = $res->fetch())
 			{
@@ -15,12 +16,12 @@
 				//echo "<p>".$donnees["date"]."  ".$donnees["measure"]."</p>";
 			}
 			
-			// retourner combien de jour par moi
-			$year = 2012;
-			$moi = 2;
-			$nbday = date('t',mktime(0,0,0,$moi,1,$year));
-			echo $nbday;
-			echo date("d-m-Y",strtotime(gmdate("d-m-Y",mktime(0,0,0,$moi,1,$year)). "+1 hour"));
+			*/
+			
+			//$nbday = date('t',mktime($heure,0,0,$mois,$jour,$year));
+			//echo $nbday;
+			$dateHeure=date("d-m-Y H:i:s",strtotime("23-04-2014 10:00:00"));
+			moyenneHeur($bdd,"serveur_est",$dateHeure,"Capteur1");
 		?>
 	</body>
 </html>
