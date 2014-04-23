@@ -20,8 +20,8 @@
 			
 			//$nbday = date('t',mktime($heure,0,0,$mois,$jour,$year));
 			//echo $nbday;
-			$dateHeure=date("d-m-Y H:i:s",strtotime("23-04-2014 10:00:00"));
-			moyenneHeur($bdd,"serveur_est",$dateHeure,"Capteur1");
+			$dateHeure=date("d-m-Y",strtotime("20-04-2014"));
+			moyenneJour($bdd,"serveur_est",$dateHeure,"Capteur1");
 		?>
 	</body>
 </html>

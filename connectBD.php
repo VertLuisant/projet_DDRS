@@ -44,8 +44,18 @@ function moyenneHeur($bdd,$table,$date,$capteur){
 	$ecart=$dateAvant-$dateMnt;
 	$somme+=$ecart*$donneeAvant;
 	echo "<p>".$somme."</p>";
-	$moyenne=$somme /3600;
+	$moyenne=$somme/3600;
 	echo "<p>".$moyenne."</p>"; 
 	return $moyenne;
+}
+
+function moyenneJour($bdd,$table,$date,$capteur){
+	$somme=0;
+	for($i=0;$i<24;$i++){
+	  $dateJour=date("d-m-Y H:i:s",strtotime($date."+".$i." hour"));
+	  $somme+=moyenneHeur($bdd,$table,$dateJour,$capteur);
+	}
+	$moyenneJour=$somme/24;
+	echo "<p>".$moyenneJour."</p>"; 
 }
 ?>
