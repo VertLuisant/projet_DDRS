@@ -52,10 +52,35 @@ function moyenneHeur($bdd,$table,$date,$capteur){
 function moyenneJour($bdd,$table,$date,$capteur){
 	$somme=0;
 	for($i=0;$i<24;$i++){
-	  $dateJour=date("d-m-Y H:i:s",strtotime($date."+".$i." hour"));
-	  $somme+=moyenneHeur($bdd,$table,$dateJour,$capteur);
+		$dateJour=date("d-m-Y H:i:s",strtotime($date."+".$i." hour"));
+		$somme+=moyenneHeur($bdd,$table,$dateJour,$capteur);
 	}
 	$moyenneJour=$somme/24;
 	echo "<p>".$moyenneJour."</p>"; 
 }
+
+function moyenneSemaine($bdd,$table,$date,$capteur){
+	$somme=0;
+	for($i=0;$i<7;$i++){
+		echo "<p> Dans la semaine ".$i."</p>"; 
+		$dateSemaine=date("d-m-Y H:i:s",strtotime($date."+".$i." days"));
+		$somme+=moyenneJour($bdd,$table,$dateSemaine,$capteur);
+	}
+	$moyenneSemaine=$somme/7;
+	echo "<p>".$moyenneSemaine."</p>"; 
+	return $moyenneSemaine;
+}
+
+function moyenneMois($bdd,$table,$date,$capteur){
+	$nbday = date('t',strtotime($date));
+	echo $nbday;
+	$somme=0;
+	for($i=0;$i<$nbday;$i++){ 
+		$dateMois=date("d-m-Y H:i:s",strtotime($date."+".$i." days"));
+		$somme+=moyenneJour($bdd,$table,$dateMois,$capteur);
+	}
+	$moyenneMois=$somme/$nbday;
+	return $moyenneMois;
+}
+
 ?>
