@@ -29,23 +29,23 @@ function moyenneHeur($bdd,$table,$date,$capteur){
 	$dateAvant=strtotime($date);
 	$dateMnt;
 	$somme=0;
-	while ($donnees = $res->fetch())
-			{
-			echo "<p>".$donnees["Annee"]." ".$donnees["Mois"]." ".$donnees['Jour']." ".$donnees['Heure']." ".$donnees[$capteur]."</p>";
+	echo '<table border="1"><tr><th> date  </th> <th> releve </th></tr>';
+	while ($donnees = $res->fetch()){
+			echo "<tr><td>".$donnees['Jour']."/".$donnees['Mois']."/".$donnees['Annee']." ".$donnees['Heure'].":".$donnees['Minute'].":".$donnees['Seconde']."</td><td>".$donnees[$capteur]."</td></tr>";
 			$dateMnt=mktime($donnees["Heure"],$donnees["Minute"],$donnees["Seconde"],$donnees["Mois"],$donnees["Jour"],$donnees["Annee"]);
-			echo "<p>".$dateMnt."</p>";
 			$ecart = $dateMnt - $dateAvant;
 			$somme+=$ecart * $donneeAvant;
-			echo "<p>".$ecart."</p>";
 			$dateAvant=$dateMnt;
 			$donneeAvant=$donnees[$capteur];
+			
 		}
 	$dateAvant=strtotime($date."+1 hour");
 	$ecart=$dateAvant-$dateMnt;
 	$somme+=$ecart*$donneeAvant;
-	echo "<p>".$somme."</p>";
+	
+	echo "</table>";
 	$moyenne=$somme/3600;
-	echo "<p>".$moyenne."</p>"; 
+	echo "<p> Moyenne horaire : ".$moyenne." W</p>"; 
 	return $moyenne;
 }
 

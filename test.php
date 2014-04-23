@@ -18,8 +18,8 @@
 			
 			*/
 			
-			$dateHeure=date("d-m-Y",strtotime("01-04-2014"));
-			moyenneMois($bdd,"serveur_est",$dateHeure,"Capteur1");
+			$dateHeure=date("d-m-Y",strtotime("21-04-2014 09:00:00"));
+			moyenneHeur($bdd,"serveur_est",$dateHeure,"Capteur1");
 		?>
 	</body>
 </html>
