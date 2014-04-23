@@ -1,3 +1,4 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd"> 
 <html>
 	<head>
 		<title>Page de Test php</title>
@@ -18,8 +19,8 @@
 			
 			*/
 			
-			$dateHeure=date("d-m-Y",strtotime("21-04-2014 09:00:00"));
-			moyenneHeur($bdd,"serveur_est",$dateHeure,"Capteur1");
+			$dateHeure=date("d-m-Y",strtotime("21-04-2014"));
+			moyenneSemaine($bdd,"serveur_est",$dateHeure,"Capteur1");
 		?>
 	</body>
 </html>
