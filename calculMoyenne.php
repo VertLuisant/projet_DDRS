@@ -19,7 +19,7 @@ function moyenneHeure($bdd,$table,$date,$capteur){
 		if($debug) echo "<tr><td>".$ligneResultat['Jour']."-".$ligneResultat['Mois']."-".$ligneResultat['Annee']." ".$ligneResultat['Heure'].":".$ligneResultat['Minute'].":".$ligneResultat['Seconde']."</td><td>".$ligneResultat[$capteur]."</td></tr>";
 		$donneeAvant=$ligneResultat[$capteur];
 	}else{
-		if($debug) echo "<tr> <td> NULL </td><td> 0 </td> <tr>";
+		if($debug) echo "<tr><td> NULL </td><td> 0 </td><tr>";
 	}
 	$condition="Annee=".$dateDecomposee['year']." AND Mois=".$dateDecomposee['mon']." AND Jour=".$dateDecomposee['mday']." AND Heure=".$dateDecomposee['hours'];
 	$res = recupData($bdd,$table,$condition);
@@ -52,7 +52,7 @@ function moyenneJour($bdd,$table,$date,$capteur){
 	if($debug) echo '<p>Consommation journaliere le '.date("d-m-Y", strtotime($date)).'</p><table border="1"><tr><th> Heure </th><th> Calcul </th></tr>';
 	for($i=0;$i<24;$i++){
 		$dateJour=date("d-m-Y H:i:s",strtotime($date."+".$i." hour"));
-		if($debug) echo "<td>".$dateJour."</td><td>";
+		if($debug) echo "<tr><td>".$dateJour."</td><td>";
 		$somme+=moyenneHeure($bdd,$table,$dateJour,$capteur);
 		if($debug) echo "</td></tr>";
 	}
@@ -69,7 +69,7 @@ function moyenneSemaine($bdd,$table,$date,$capteur){
 	if($debug) echo '<p>Consommation hebdomadaire, semaine du '.date("d-m-Y", strtotime($date)).'</p><table border="1"><tr><th> Jour </th><th> Calcul </th></tr>';
 	for($i=0;$i<7;$i++){
 		$dateSemaine=date("d-m-Y H:i:s",strtotime($date."+".$i." days"));
-		if($debug) echo "<td>".$dateSemaine."</td><td>";
+		if($debug) echo "<tr><td>".$dateSemaine."</td><td>";
 		$somme+=moyenneJour($bdd,$table,$dateSemaine,$capteur);
 		if($debug) echo "</td></tr>";
 	}
@@ -86,7 +86,7 @@ function moyenneMois($bdd,$table,$date,$capteur){
 	$somme=0;
 	for($i=0;$i<$nbday;$i++){ 
 		$dateMois=date("d-m-Y H:i:s",strtotime($date."+".$i." days"));
-		if($debug) echo "<td>".$dateMois."</td><td>";
+		if($debug) echo "<tr><td>".$dateMois."</td><td>";
 		$somme+=moyenneJour($bdd,$table,$dateMois,$capteur);
 		if($debug) echo "</td></tr>";
 	}
