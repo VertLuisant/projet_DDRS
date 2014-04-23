@@ -1,0 +1,12 @@
+{
+	"modules" : [
+		{
+			"nom" : "testModule1.php",
+			"fonction" : "afficherUn()"
+		},
+		{
+			"nom" : "testModule2.php",
+			"fonction" : "afficherDeux()"
+		}
+	]
+}
