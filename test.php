@@ -6,8 +6,8 @@
 	
 	<body>
 		<?php
-			include "connectBD.php";
-			
+			include_once "connectBD.php";
+			include_once "calculMoyenne.php";
 			$bdd = connectBD();
 			/*
 			$res = recupData($bdd, "serveur_est");
@@ -20,7 +20,7 @@
 			*/
 			
 			$dateHeure=date("d-m-Y",strtotime("21-04-2014"));
-			moyenneSemaine($bdd,"serveur_est",$dateHeure,"Capteur1");
+			moyenneJour($bdd,"extension_ouest",$dateHeure,"Capteur1");
 		?>
 	</body>
 </html>
