@@ -1,12 +1,12 @@
 {
 	"modules" : [
 		{
-			"nom" : "testModule1.php",
-			"fonction" : "afficherUn()"
+			"nomFichierPhp" : "moduleJauge.php",
+			"nomFonctionJs" : "affichageJauge"
 		},
 		{
-			"nom" : "testModule2.php",
-			"fonction" : "afficherDeux()"
+			"nomFichierPhp" : "testModule2.php",
+			"nomFonctionJs" : "afficherDeux"
 		}
 	]
 }

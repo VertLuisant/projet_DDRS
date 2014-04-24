@@ -1,48 +1,33 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd"> 
+<!DOCTYPE html>
 <html>
 	<head>
+		<meta charset="utf-8" />
+		<link rel="stylesheet" href="style.css"/>
 		<title>Page de Test php</title>
 		<script type="text/javascript" src="js/jquery-1.11.0.min.js"></script>
 		<script type="text/javascript" src="js/functions.js"></script>
+		<script type="text/javascript" src="modules/moduleJauge.js"></script>
+		<script type="text/javascript" src="js/raphael.2.1.0.min.js"></script>
+		<script type="text/javascript" src="js/justgage.1.0.1.min.js"></script>
 	</head>
 	
 	<body>
-		<?php
-			include_once "connectBD.php";
-			include_once "calculMoyenne.php";
-			$bdd = connectBD();
-			/*
-			$res = recupData($bdd, "serveur_est");
-			while ($donnees = $res->fetch())
-			{
-				echo "<p>".$donnees["Annee"]." ".$donnees["Mois"]." ".$donnees['Jour']." ".$donnees['Heure']." ".$donnees['Minute']." ".$donnees['Capteur1']."</p>";
-				//echo "<p>".$donnees["date"]."  ".$donnees["measure"]."</p>";
-			}
-			
-			*/
-			
-			/*
-			$dateHeure=date("d-m-Y",strtotime("21-04-2014"));
-			moyenneJour($bdd,"extension_ouest",$dateHeure,"Capteur1");
-			*/
-			
-		?>
+		<!--  div module est l'endoit ou s'afficheront les graphiques generes par le javascript -->
+		<div id="module"></div>
 		
-		<div id=module>
-			Hello World !
-		</div>
 		
+		<!-- Script permettant le changement de module -->
 		<script type="text/javascript">
 			$.getJSON( "modules.json", function(json) {
 				var i = 0;
-				
+				changerModule(json.modules[i].nomFichierPhp, json.modules[i].nomFonctionJs);
 				setInterval(function(){
-					changerModule(json.modules[i].nom, json.modules[i].fonction);
 					i = i + 1;
 					if(i >= json.modules.length){
 						i = 0;
 					}
-				}, 5000);
+					changerModule(json.modules[i].nomFichierPhp, json.modules[i].nomFonctionJs);
+				}, 10000);
 			});
 		</script>
 	</body>

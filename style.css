@@ -1,0 +1,13 @@
+body {
+	text-align: center;
+}
+
+#jauge {
+	text-align: center;
+	width: 1300px;
+	height: 600px;
+}
+
+#message{
+    font-size: 45px;
+}

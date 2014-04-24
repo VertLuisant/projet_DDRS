@@ -1,9 +1,10 @@
-function changerModule(fichier, fonction){
-	//$('#module').html(fichier+' '+fonction);
-	$.ajax({
-		url: "modules/"+fichier,
-		dataType:'html'
-	}).done(function(arg){
-		$('#module').html(arg); 
-	});
+function changerModule(fichierPhp, fonctionJs){
+	var fn = new Function(fonctionJs+'("'+fichierPhp+'")');
+	fn();
+}
+
+
+
+function afficherDeux(){
+	$('#module').html("affichage 2");
 }
