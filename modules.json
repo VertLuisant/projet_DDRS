@@ -5,8 +5,12 @@
 			"nomFonctionJs" : "affichageJauge"
 		},
 		{
-			"nomFichierPhp" : "testModule2.php",
-			"nomFonctionJs" : "afficherDeux"
+			"nomFichierPhp" : "moduleGrapheLigne.php",
+			"nomFonctionJs" : "affichageGrapheLigne"
+		}
+		{
+			"nomFichierPhp" : "moduleHistogramme.php",
+			"nomFonctionJs" : "affichageHistogramme"
 		}
 	]
 }

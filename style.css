@@ -2,7 +2,7 @@ body {
 	text-align: center;
 }
 
-#jauge {
+#jauge, canvas {
 	text-align: center;
 	width: 1300px;
 	height: 600px;
