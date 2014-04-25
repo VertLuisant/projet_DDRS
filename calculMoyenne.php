@@ -45,11 +45,26 @@ function moyenneHeure($bdd,$table,$date,$capteur){
 	return $moyenne;
 }
 
+function moyenneParDeuxHeure($bdd,$table,$date,$capteur){
+	global $debug;
+	$somme=0;
+	if($debug) echo '<p>Consommation par deux heure le '.date("d-m-Y H:i:s", strtotime($date)).'</p><table border="1"><tr><th> Heure </th><th> Calcul </th></tr>';
+	for($i=0;$i<2;$i++){
+		$dateJour=date("d-m-Y H:i:s",strtotime($date."-".$i." hour"));
+	if($debug)	echo "<tr><td>".$dateJour."</td><td>";
+		$somme+=moyenneHeure($bdd,$table,$dateJour,$capteur);
+	if($debug)	 echo "</td></tr>";
+	}
+	$moyenneParDeuxHeure=$somme/2;
+	if($debug) echo "</table><p>Moyenne par deux heure : ".$moyenneParDeuxHeure." W</p>"; 
+	
+	return $moyenneParDeuxHeure;
+}
 //Retourne la moyenne journaliere a la date $date du $capteur
 function moyenneJour($bdd,$table,$date,$capteur){
 	global $debug;
 	$somme=0;
-	if($debug) echo '<p>Consommation journaliere le '.date("d-m-Y", strtotime($date)).'</p><table border="1"><tr><th> Heure </th><th> Calcul </th></tr>';
+	if($debug) echo '<p>Consommation journaliere le '.date("d-m-Y ", strtotime($date)).'</p><table border="1"><tr><th> Heure </th><th> Calcul </th></tr>';
 	for($i=0;$i<24;$i++){
 		$dateJour=date("d-m-Y H:i:s",strtotime($date."+".$i." hour"));
 		if($debug) echo "<tr><td>".$dateJour."</td><td>";
