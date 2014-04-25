@@ -20,10 +20,10 @@
 		<!-- Script permettant le changement de module -->
 		<script type="text/javascript">
 			//Get context with jQuery - using jQuery's .get() method.
-			var ctx = $('#graphe').get(0).getContext("2d");
+		//	var ctx = $('#graphe').get(0).getContext("2d");
 			//This will get the first returned node in the jQuery collection.
 			
-			var myNewChart = new Chart(ctx);
+		//	var myNewChart = new Chart(ctx);
 			
 			/*var data = {
 				labels : ["January","February","March","April","May","June","July"],
@@ -63,7 +63,7 @@
 }
 			new Chart(ctx).Bar(data);*/
 			
-		/*
+		
 			$.getJSON( "modules.json", function(json) {
 				var i = 0;
 				changerModule(json.modules[i].nomFichierPhp, json.modules[i].nomFonctionJs);
@@ -74,7 +74,7 @@
 					}
 					changerModule(json.modules[i].nomFichierPhp, json.modules[i].nomFonctionJs);
 				}, 10000);
-			});*/
+			});
 		</script>
 	</body>
 </html>
