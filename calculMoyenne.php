@@ -2,7 +2,7 @@
 //Permet le calcul moyenne par heure, jour, semaine ou mois
 include_once "connectBD.php";
 
-$debug = 1;
+$debug = 0;
 
 //Retourne la moyenne horaire a la date $date du $capteur
 function moyenneHeure($bdd,$table,$date,$capteur){

@@ -67,7 +67,8 @@
 			
 		
 			$.getJSON( "modules.json", function(json) {
-				var i = 0;
+				changerModule(json.modules[2].nomFichierPhp, json.modules[2].nomFonctionJs);
+				/*var i = 0;
 				changerModule(json.modules[i].nomFichierPhp, json.modules[i].nomFonctionJs);
 				setInterval(function(){
 					i = i + 1;
@@ -75,7 +76,7 @@
 						i = 0;
 					}
 					changerModule(json.modules[i].nomFichierPhp, json.modules[i].nomFonctionJs);
-				}, 10000);
+				}, 10000);*/
 			});
 		</script>
 	</body>
