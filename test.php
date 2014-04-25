@@ -7,6 +7,8 @@
 		<script type="text/javascript" src="js/jquery-1.11.0.min.js"></script>
 		<script type="text/javascript" src="js/functions.js"></script>
 		<script type="text/javascript" src="modules/moduleJauge.js"></script>
+		<script type="text/javascript" src="modules/moduleHistogramme.js"></script>
+		<script type="text/javascript" src="modules/moduleGrapheLigne.js"></script>
 		<script type="text/javascript" src="js/raphael.2.1.0.min.js"></script>
 		<script type="text/javascript" src="js/justgage.1.0.1.min.js"></script>
 		<script type="text/javascript" src="js/Chart.min.js"></script>
@@ -14,7 +16,7 @@
 	
 	<body>
 		<!--  div module est l'endoit ou s'afficheront les graphiques generes par le javascript -->
-		<div id="module"><canvas id="graphe" height="600px" width="1300px"></canvas></div>
+		<div id="module"></div>
 		
 		
 		<!-- Script permettant le changement de module -->

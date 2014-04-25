@@ -7,7 +7,7 @@
 		{
 			"nomFichierPhp" : "moduleGrapheLigne.php",
 			"nomFonctionJs" : "affichageGrapheLigne"
-		}
+		},
 		{
 			"nomFichierPhp" : "moduleHistogramme.php",
 			"nomFonctionJs" : "affichageHistogramme"
