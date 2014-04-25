@@ -3,13 +3,17 @@
 	include_once "../calculMoyenne.php";
 	
 	$bdd = connectBD();
-	$dateActuelle=date("d-m-Y H:i:s",mktime(24,0,0,date('m'),date('d'),date('Y')));
+	$numeroJour=date("N");
+	$ecart=7-$numeroJour;
+	$dateActuelle=date("d-m-Y H:i:s",mktime(24,0,0,date('m'),date('d')+$ecart,date('Y')));
 	$dateSemainePrecedant=date("d-m-Y H:i:s",strtotime($dateActuelle.'-1 week'));
 	$dataConsomme=[];
 	$dataConsommePrecedant=[];
 	$weekarray=[];
 	$weekarraySemainePrecedant=[];
 	
+	$dateActuelleDe=date("d-m-Y",strtotime($dateActuelle.'-1 week'));
+	$datePrecedantDe=date("d-m-Y",strtotime($dateActuelleDe.'-1 week'));
 	// on calclue le moyenne de consomation par deux heure
 	
 	for($j=0;$j<7;$j++){
@@ -30,7 +34,7 @@
 					
 	$donneesGrapheLigne = array(
 	   "dateActuelle"=> array (
-			"labels" => $weekarray,
+			//"labels" => $weekarray,
 			"labels" => array("","","l","u","n","d","i","","00","", "","|",
 							"","","m","a","r","d","i","","0","0", "","|",
 							"m","e","r","c","r","e","d","i","","0","0","|",
@@ -60,7 +64,9 @@
 					"data" => $dataConsommePrecedant
 					)
 				)	
-			)
+			),
+		"dateActuelleDe"=> $dateActuelleDe,
+		"datePrecedantDe"=> $datePrecedantDe
 	);
 	echo json_encode ($donneesGrapheLigne);
 ?>
