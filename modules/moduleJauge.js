@@ -21,7 +21,7 @@ function affichageJauge(fichierPhp){
 			//affiche le message indiquant la consommation dans la balise div message
 			$('#message').html('Cela correspond à : ');
 			if(data.valeur<8000){
-				$('#message').append('<img src="image/radiateur.jpg" />');
+				$('#message').append('<img src="" />');
 			}else {
 				if(data.valeur<10000){
 				}else{

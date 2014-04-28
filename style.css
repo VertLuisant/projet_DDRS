@@ -9,5 +9,12 @@ body {
 }
 
 #message{
-    font-size: 45px;
+    font-size: 30px;
+}
+#bottom{
+	font-size: 15px;
+}
+#title, #titleSemainePrecedant{
+	font-size: 30px;
+	text-align: center;
 }
