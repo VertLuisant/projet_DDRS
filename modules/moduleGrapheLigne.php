@@ -21,8 +21,8 @@
 	
 	for($j=0;$j<7;$j++){
 		  for($i=0;$i<12;$i++){
-		    array_unshift($dataConsomme,round(moyenneParDeuxHeure($bdd,"serveur_est",$dateActuelle,"Capteur1")));
-		    array_unshift($dataConsommePrecedent,round(moyenneParDeuxHeure($bdd,"serveur_est",$dateSemainePrecedent,"Capteur1")));
+		    array_unshift($dataConsomme,round(moyenneParDeuxHeure($bdd,"serveur_est",$dateActuelle)));
+		    array_unshift($dataConsommePrecedent,round(moyenneParDeuxHeure($bdd,"serveur_est",$dateSemainePrecedent)));
 		    $dateActuelle=date("d-m-Y H:i:s",strtotime($dateActuelle."-2 hour"));
 		    $dateSemainePrecedent=date("d-m-Y H:i:s",strtotime($dateSemainePrecedent."-2 hour"));
 		}

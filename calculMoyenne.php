@@ -2,10 +2,10 @@
 //Permet le calcul moyenne par heure, jour, semaine ou mois
 include_once "connectBD.php";
 
-$debug = 0;
+$debug = 1;
 
 //Retourne la moyenne horaire a la date $date du $capteur
-function moyenneHeure($bdd,$table,$date,$capteur){
+function moyenneHeure($bdd,$table,$date,$capteur=null){
 	global $debug;
 	$dateDecomposee=getdate(strtotime($date));
 	$dateMoinsUneHeure=date("d-m-Y H:i:s",strtotime($date."-1 hour"));
@@ -17,7 +17,14 @@ function moyenneHeure($bdd,$table,$date,$capteur){
 	if($debug) echo '<p>Consommation horaire le '.$date.'</p><table border="1"><tr><th> date </th> <th> releve '.$capteur.'</th></tr>';
 	if($ligneResultat = $res2->fetch()){
 		if($debug) echo "<tr><td>".$ligneResultat['Jour']."-".$ligneResultat['Mois']."-".$ligneResultat['Annee']." ".$ligneResultat['Heure'].":".$ligneResultat['Minute'].":".$ligneResultat['Seconde']."</td><td>".$ligneResultat[$capteur]."</td></tr>";
+		if($capteur!=null){
 		$donneeAvant=$ligneResultat[$capteur];
+		}else{
+		$donneeAvant=0;
+		  for($i=1;$i<=6;$i++){
+	       $donneeAvant+=$ligneResultat["Capteur".$i];
+		  }
+		}
 	}else{
 		if($debug) echo "<tr><td> NULL </td><td> 0 </td><tr>";
 	}
@@ -33,7 +40,15 @@ function moyenneHeure($bdd,$table,$date,$capteur){
 			$ecart = $dateActuelle - $dateAvant;
 			$somme+=$ecart * $donneeAvant;
 			$dateAvant=$dateActuelle;
-			$donneeAvant=$ligneResultat[$capteur];
+			
+			if($capteur!=null){
+				$donneeAvant=$ligneResultat[$capteur];
+			}else{
+			  $donneeAvant=0;
+			for($i=1;$i<=6;$i++){
+				$donneeAvant+=$ligneResultat["Capteur".$i];
+				}
+			}
 		}
 	$dateFin=strtotime($date."+1 hour");
 	if(isset($dateActuelle)){
@@ -45,7 +60,7 @@ function moyenneHeure($bdd,$table,$date,$capteur){
 	return $moyenne;
 }
 
-function moyenneParDeuxHeure($bdd,$table,$date,$capteur){
+function moyenneParDeuxHeure($bdd,$table,$date,$capteur=null){
 	global $debug;
 	$somme=0;
 	if($debug) echo '<p>Consommation par deux heure le '.date("d-m-Y H:i:s", strtotime($date)).'</p><table border="1"><tr><th> Heure </th><th> Calcul </th></tr>';
@@ -61,7 +76,7 @@ function moyenneParDeuxHeure($bdd,$table,$date,$capteur){
 	return $moyenneParDeuxHeure;
 }
 //Retourne la moyenne journaliere a la date $date du $capteur
-function moyenneJour($bdd,$table,$date,$capteur){
+function moyenneJour($bdd,$table,$date,$capteur=null){
 	global $debug;
 	$somme=0;
 	if($debug) echo '<p>Consommation journaliere le '.date("d-m-Y ", strtotime($date)).'</p><table border="1"><tr><th> Heure </th><th> Calcul </th></tr>';
@@ -78,7 +93,7 @@ function moyenneJour($bdd,$table,$date,$capteur){
 }
 
 //Retourne la moyenne hebdomadaire a la semaine debutant au $date du $capteur
-function moyenneSemaine($bdd,$table,$date,$capteur){
+function moyenneSemaine($bdd,$table,$date,$capteur=null){
 	global $debug;
 	$somme=0;
 	if($debug) echo '<p>Consommation hebdomadaire, semaine du '.date("d-m-Y", strtotime($date)).'</p><table border="1"><tr><th> Jour </th><th> Calcul </th></tr>';
@@ -94,7 +109,7 @@ function moyenneSemaine($bdd,$table,$date,$capteur){
 }
 
 //Retourne la moyenne mensuelle du mois $date du $capteur
-function moyenneMois($bdd,$table,$date,$capteur){
+function moyenneMois($bdd,$table,$date,$capteur=null){
 	global $debug;
 	$nbday = date('t',strtotime($date));
 	if($debug) echo '<p>Consommation mensuelle du '.date("d-m-Y", strtotime($date)).'</p><table border="1"><tr><th> Jour </th><th> Calcul </th></tr>';
