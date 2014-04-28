@@ -6,19 +6,20 @@
 	$bdd = connectBD();
 	$numeroJour=date("N");
 	$ecart=7-$numeroJour;
+	
+	//calcule le dernier jour de la semaine et la semaine precedente
 	$dateActuelle=date("d-m-Y H:i:s",mktime(24,0,0,date('m'),date('d')+$ecart,date('Y')));
 	$dateSemainePrecedent=date("d-m-Y H:i:s",strtotime($dateActuelle.'-1 week'));
 	$dataConsomme=array();
 	$dataConsommePrecedent=array();
 	
-
-	
+	//calcule le premier jour de la semaine et la semaine precedente
 	$dateActuelleDe=date("d-m-Y",strtotime($dateActuelle.'-1 week'));
 	$datePrecedentDe=date("d-m-Y",strtotime($dateActuelleDe.'-1 week'));
 	$listLabelSemaineActuelle = editLabelSemaine($dateActuelleDe);
 	$listLabelSemainePrecedente = editLabelSemaine($datePrecedentDe);
-	// on calclue le moyenne de consomation par deux heure
 	
+	// on calclue le moyenne de consomation par deux heure
 	for($j=0;$j<7;$j++){
 		  for($i=0;$i<12;$i++){
 		    array_unshift($dataConsomme,round(moyenneParDeuxHeure($bdd,"serveur_est",$dateActuelle)));
@@ -27,7 +28,8 @@
 		    $dateSemainePrecedent=date("d-m-Y H:i:s",strtotime($dateSemainePrecedent."-2 hour"));
 		}
 	}
-					
+	
+	// le donnee pour le graphe ligne				
 	$donneesGrapheLigne = array(
 	   "dateSemainePrecedent"=> array (
 			"labels" => $listLabelSemainePrecedente,
