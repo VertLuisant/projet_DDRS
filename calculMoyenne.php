@@ -16,13 +16,10 @@ function moyenneHeure($bdd,$table,$date,$capteur=null){
 	$donneeAvant=0;
 	//if($debug) echo '<p>Consommation horaire le '.$date.'</p><table border="1"><tr><th> date </th> <th> releve '.$capteur.'</th></tr>';
 	if($ligneResultat = $res2->fetch()){
-<<<<<<< HEAD
 		//if($debug) echo "<tr><td>".$ligneResultat['Jour']."-".$ligneResultat['Mois']."-".$ligneResultat['Annee']." ".$ligneResultat['Heure'].":".$ligneResultat['Minute'].":".$ligneResultat['Seconde']."</td><td>".$ligneResultat[$capteur]."</td></tr>";
-		if($capteur!=null){
-=======
+		if(!empty($capteur){
 		if($debug) echo "<tr><td>".$ligneResultat['Jour']."-".$ligneResultat['Mois']."-".$ligneResultat['Annee']." ".$ligneResultat['Heure'].":".$ligneResultat['Minute'].":".$ligneResultat['Seconde']."</td><td>".$ligneResultat[$capteur]."</td></tr>";
 		if(!empty($capteur)){
->>>>>>> 447ef97631d19000f48173f23e8d417e830e0a98
 		$donneeAvant=$ligneResultat[$capteur];
 		}else{
 		$donneeAvant=0;
