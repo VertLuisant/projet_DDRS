@@ -4,6 +4,17 @@ include_once "connectBD.php";
 
 $debug = 0;
 
+function consommationActuelle($bdd){
+	$condition = "1 ORDER BY `Annee` DESC , `Mois` DESC , `Jour` DESC, `Heure` DESC, `Minute` DESC LIMIT 0 , 1";
+	$res1 = recupData($bdd,"serveur_est", $condition)->fetch();
+	$res2 = recupData($bdd,"extension_ouest",$condition)->fetch();
+	$consommation = 0;
+	for($i = 1; $i < 7 ; $i++){
+		$consommation += $res1["Capteur".$i]+$res2["Capteur".$i];
+	}
+	return $consommation;
+}
+
 //Retourne la moyenne horaire a la date $date du $capteur
 function moyenneHeure($bdd,$table,$date,$capteur=null){
 	global $debug;
@@ -17,8 +28,7 @@ function moyenneHeure($bdd,$table,$date,$capteur=null){
 	//if($debug) echo '<p>Consommation horaire le '.$date.'</p><table border="1"><tr><th> date </th> <th> releve '.$capteur.'</th></tr>';
 	if($ligneResultat = $res2->fetch()){
 		//if($debug) echo "<tr><td>".$ligneResultat['Jour']."-".$ligneResultat['Mois']."-".$ligneResultat['Annee']." ".$ligneResultat['Heure'].":".$ligneResultat['Minute'].":".$ligneResultat['Seconde']."</td><td>".$ligneResultat[$capteur]."</td></tr>";
-		if(!empty($capteur){
-		if($debug) echo "<tr><td>".$ligneResultat['Jour']."-".$ligneResultat['Mois']."-".$ligneResultat['Annee']." ".$ligneResultat['Heure'].":".$ligneResultat['Minute'].":".$ligneResultat['Seconde']."</td><td>".$ligneResultat[$capteur]."</td></tr>";
+		
 		if(!empty($capteur)){
 		$donneeAvant=$ligneResultat[$capteur];
 		}else{
@@ -37,7 +47,7 @@ function moyenneHeure($bdd,$table,$date,$capteur=null){
 	$somme=0;
 	
 	while ($ligneResultat = $res->fetch()){
-			if($debug) echo "<tr><td>".$ligneResultat['Jour']."-".$ligneResultat['Mois']."-".$ligneResultat['Annee']." ".$ligneResultat['Heure'].":".$ligneResultat['Minute'].":".$ligneResultat['Seconde']."</td><td>".$ligneResultat[$capteur]."</td></tr>";
+			//if($debug) echo "<tr><td>".$ligneResultat['Jour']."-".$ligneResultat['Mois']."-".$ligneResultat['Annee']." ".$ligneResultat['Heure'].":".$ligneResultat['Minute'].":".$ligneResultat['Seconde']."</td><td>".$ligneResultat[$capteur]."</td></tr>";
 			$dateActuelle=mktime($ligneResultat["Heure"],$ligneResultat["Minute"],$ligneResultat["Seconde"],$ligneResultat["Mois"],$ligneResultat["Jour"],$ligneResultat["Annee"]);
 			$ecart = $dateActuelle - $dateAvant;
 			$somme+=$ecart * $donneeAvant;

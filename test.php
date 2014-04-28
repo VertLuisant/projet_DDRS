@@ -25,7 +25,7 @@
 		
 			$.getJSON( "modules.json", function(json) {
 				var i = 0;
-				changerModule(json.modules[1].nomFichierPhp, json.modules[1].nomFonctionJs);
+				changerModule(json.modules[0].nomFichierPhp, json.modules[0].nomFonctionJs);
 				/*setInterval(function(){
 					i = i + 1;
 					if(i >= json.modules.length){
