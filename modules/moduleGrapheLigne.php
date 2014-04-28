@@ -33,9 +33,9 @@
 			"labels" => $listLabelSemainePrecedente,
 			"datasets" => array(
 				array(
-					"fillColor" => "rgba(220,220,220,0.5)",
-					"strokeColor" => "rgba(220,220,220,1)",
-					"pointColor" => "rgba(220,220,220,1)",
+					"fillColor" => "rgba(0,156,221,0.5)",
+					"strokeColor" => "rgba(0,156,221,1)",
+					"pointColor" => "rgba(0,166,214,0.5)",
 					"pointStrokeColor" => "#fff",
 					"data" => $dataConsommePrecedent
 				)
@@ -45,9 +45,9 @@
 			"labels" => $listLabelSemaineActuelle,
 			"datasets" => array(
 				array(
-					"fillColor" => "rgba(151,187,205,0.5)",
-					"strokeColor" =>"rgba(151,187,205,1)",
-					"pointColor" => "rgba(151,187,205,1)",
+					"fillColor" => "rgba(0,156,221,0.5)",
+					"strokeColor" => "rgba(0,156,221,1)",
+					"pointColor" => "rgba(0,166,214,0.5)",
 					"pointStrokeColor" => "#fff",
 					"data" => $dataConsomme
 					)

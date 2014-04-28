@@ -1,3 +1,8 @@
+@font-face {
+	font-family: 'Eurostile';
+	src: url('police/EurostileTMed.ttf');
+}
+
 body {
 	text-align: center;
 }
@@ -14,7 +19,10 @@ body {
 #bottom{
 	font-size: 15px;
 }
-#title, #titleSemainePrecedant{
-	font-size: 30px;
+.title{
+	margin: 15px;
+	font-family: 'Eurostile';
+	font-size: 50px;
 	text-align: center;
+	color: rgba(0, 59, 11, 0.5);
 }

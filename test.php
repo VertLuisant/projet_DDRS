@@ -25,15 +25,14 @@
 		
 			$.getJSON( "modules.json", function(json) {
 				var i = 0;
-				changerModule(json.modules[i].nomFichierPhp, json.modules[i].nomFonctionJs);
-				setInterval(function(){
+				changerModule(json.modules[1].nomFichierPhp, json.modules[1].nomFonctionJs);
+				/*setInterval(function(){
 					i = i + 1;
 					if(i >= json.modules.length){
 						i = 0;
 					}
 					changerModule(json.modules[i].nomFichierPhp, json.modules[i].nomFonctionJs);
-				}, 10000);
-				//changerModule(json.modules[1].nomFichierPhp, json.modules[1].nomFonctionJs);
+				}, 10000);*/
 			});
 		</script>
 	</body>

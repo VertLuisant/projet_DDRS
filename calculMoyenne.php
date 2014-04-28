@@ -2,7 +2,7 @@
 //Permet le calcul moyenne par heure, jour, semaine ou mois
 include_once "connectBD.php";
 
-$debug = 1;
+$debug = 0;
 
 //Retourne la moyenne horaire a la date $date du $capteur
 function moyenneHeure($bdd,$table,$date,$capteur=null){
@@ -14,9 +14,9 @@ function moyenneHeure($bdd,$table,$date,$capteur=null){
     $condition2="Annee=".$dateMoinsUneHeureDecomposee['year']." AND Mois=".$dateMoinsUneHeureDecomposee['mon']." AND Jour=".$dateMoinsUneHeureDecomposee['mday']." AND Heure=".$dateMoinsUneHeureDecomposee['hours']." order by minute DESC";
 	$res2 = recupData($bdd,$table,$condition2);
 	$donneeAvant=0;
-	if($debug) echo '<p>Consommation horaire le '.$date.'</p><table border="1"><tr><th> date </th> <th> releve '.$capteur.'</th></tr>';
+	//if($debug) echo '<p>Consommation horaire le '.$date.'</p><table border="1"><tr><th> date </th> <th> releve '.$capteur.'</th></tr>';
 	if($ligneResultat = $res2->fetch()){
-		if($debug) echo "<tr><td>".$ligneResultat['Jour']."-".$ligneResultat['Mois']."-".$ligneResultat['Annee']." ".$ligneResultat['Heure'].":".$ligneResultat['Minute'].":".$ligneResultat['Seconde']."</td><td>".$ligneResultat[$capteur]."</td></tr>";
+		//if($debug) echo "<tr><td>".$ligneResultat['Jour']."-".$ligneResultat['Mois']."-".$ligneResultat['Annee']." ".$ligneResultat['Heure'].":".$ligneResultat['Minute'].":".$ligneResultat['Seconde']."</td><td>".$ligneResultat[$capteur]."</td></tr>";
 		if($capteur!=null){
 		$donneeAvant=$ligneResultat[$capteur];
 		}else{
