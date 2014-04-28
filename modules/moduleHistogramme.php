@@ -28,7 +28,7 @@
 				"fillColor" => "rgba(0,156,221,0.5)",
 				"strokeColor" => "rgba(0,156,221,0.5)",
 				//"data" => $listDonneesAnneePrecedente
-				"data"=> array(20,30,40,50,60,70)
+				"data"=> array(70,60,50,40,30,20)
 			),
 			array(
 				"fillColor" => "rgba(0,90,150,0.7)",

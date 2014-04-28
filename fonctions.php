@@ -7,36 +7,40 @@ function editLabelSemaine($dateDebutSemaine){
 		switch ($i){
 		//lundi
 		case 1:
-			array_push($listLabel, "","","L","U","N","D","I","",date("d", strtotime($dateActuelle)),"","","|");
+			array_push($listLabel, "Lundi ".date("d", strtotime($dateActuelle)));
 			break;
 		//mardi
 		case 2:
-			array_push($listLabel, "","","M","A","R","D","I","",date("d", strtotime($dateActuelle)),"","","|");
+			array_push($listLabel, "Mardi ".date("d", strtotime($dateActuelle)));
 			break;
 		//mercredi
 		case 3:
-			array_push($listLabel, "M","E","R","C","R","E","D","I","",date("d", strtotime($dateActuelle)),"","|");
+			array_push($listLabel, "Mercredi ".date("d", strtotime($dateActuelle)));
 			break;
 		//jeudi
 		case 4:
-			array_push($listLabel, "","","J","E","U","D","I","",date("d", strtotime($dateActuelle)),"","","|");
+			array_push($listLabel, "Jeudi ".date("d", strtotime($dateActuelle)));
 			break;
 		//vendredi
 		case 5:
-			array_push($listLabel, "V","E","N","D","R","E","D","I","",date("d", strtotime($dateActuelle)),"","|");
+			array_push($listLabel, "Vendredi ".date("d", strtotime($dateActuelle)));
 			break;
 		//samedi
 		case 6:
-			array_push($listLabel, "","","S","A","M","E","D","I","",date("d", strtotime($dateActuelle)),"","|");
+			array_push($listLabel, "Samedi ".date("d", strtotime($dateActuelle)));
 			break;
 		//dimanche
 		case 7:
-			array_push($listLabel, "D","I","M","A","N","C","H","E","",date("d", strtotime($dateActuelle)),"","|");
+			array_push($listLabel, "Dimanche ".date("d", strtotime($dateActuelle)));
 			break;
 		}
 		$dateActuelle = date("d-m-Y", strtotime($dateActuelle."+1 day"));
 	}
 	return $listLabel;
+}
+
+function ecritureDate($date){
+	return date("d", strtotime($date))." ".traduction(date("F", strtotime($date)))." ".date("Y", strtotime($date));
 }
 
 function traduction($motAnglais){

@@ -1,12 +1,26 @@
+/* Commun */
+
 @font-face {
 	font-family: 'Eurostile';
 	src: url('police/EurostileTMed.ttf');
 }
 
-#jauge, canvas {
+.title{
+	margin: 15px;
+	margin-top: 50px;
+	font-family: 'Eurostile';
+	font-size: 50px;
+	text-align: center;
+	color: #004A75;
+}
+
+/* module 1 */
+
+#jauge{
 	margin: auto;
+	margin-top:-20px;
 	width: 1300px;
-	height: 620px;
+	height: 600px;
 }
 
 .image{
@@ -27,10 +41,41 @@
 	text-align: center;
 	color: rgba(0, 59, 11, 0.5);
 }
-.title{
-	margin: 15px;
+
+/* module 2 */
+
+#semainePrecedente, #semaineActuelle{
+	margin-left:128px;
+	margin-top:-40px;
+	font-size: 20px;
 	font-family: 'Eurostile';
-	font-size: 50px;
+	text-align: center;
+	color: #004A75;
+}
+
+.nomSemaine{
+	margin: auto;
+	margin-top:40px;
+	margin-bottom:15px;
+	font-family: 'Eurostile';
+	font-size: 25px;
 	text-align: center;
 	color: rgba(0, 59, 11, 0.5);
+	clear:left;
+}
+
+.labelJour{
+	float:left;
+	border-left:3px solid rgba(0, 59, 11, 0.5);
+}
+
+/* module 2 et 3 */
+
+canvas {
+	display: block;
+	margin: auto;
+	margin-top:15px;
+	margin-bottom:15px;
+	width: 1300px;
+	height: 620px;
 }

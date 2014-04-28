@@ -11,7 +11,7 @@ function affichageJauge(fichierPhp){
 				id: "jauge",
 				value: data.valeur,
 				min: 5000,
-				max: 25000,
+				max: 35000,
 				title: "Consommation électrique actuelle",
 				titleFontColor: "#004A75",
 				label: "Watt",

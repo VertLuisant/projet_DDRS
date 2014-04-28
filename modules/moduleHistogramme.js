@@ -1,6 +1,6 @@
 function affichageHistogramme(fichierPhp){
 	$('#module').html(''); //Supprime le contenu de la balise div module
-	$('#module').append('<div id="consomationParMois" class="title"></div><canvas id="histogramme" width="1300" height="600"></canvas>');
+	$('#module').append('<div id="consommationParMois" class="title"></div><canvas id="histogramme" width="1300" height="600"></canvas>');
 	
 	$.ajax({
 		url: "modules/"+fichierPhp,
@@ -16,7 +16,7 @@ function affichageHistogramme(fichierPhp){
 			
 			new Chart(ctx).Bar(data,options);
 			
-			$('#consomationParMois').html('Consomation électrique par mois');
+			$('#consommationParMois').html('Consommation électrique par mois');
 		}
 		
 	});
