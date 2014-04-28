@@ -3,21 +3,29 @@
 	src: url('police/EurostileTMed.ttf');
 }
 
-body {
-	text-align: center;
+#jauge, canvas {
+	margin: auto;
+	width: 1300px;
+	height: 620px;
 }
 
-#jauge, canvas {
-	text-align: center;
-	width: 1300px;
-	height: 600px;
+.image{
+	vertical-align:middle;
 }
 
 #message{
-    font-size: 30px;
+	margin: 10px;
+    font-size: 40px;
+	font-family: 'Eurostile';
+	text-align: center;
+	color: #004A75;
 }
+
 #bottom{
 	font-size: 15px;
+	font-family: 'Eurostile';
+	text-align: center;
+	color: rgba(0, 59, 11, 0.5);
 }
 .title{
 	margin: 15px;

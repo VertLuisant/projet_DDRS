@@ -1,6 +1,6 @@
 function affichageJauge(fichierPhp){
 	$('#module').html(''); //Supprime le contenu de la balise div module
-	$('#module').append('<div id="jauge"></div><div id="message"></div><div id="bottom"></div>');
+	$('#module').append('<div id="jauge"></div><div id="bottom"></div><div id="message"></div>');
 	
 	$.ajax({
 		url: "modules/"+fichierPhp,
@@ -13,6 +13,7 @@ function affichageJauge(fichierPhp){
 				min: 5000,
 				max: 25000,
 				title: "Consommation électrique actuelle",
+				titleFontColor: "#004A75",
 				label: "Watt",
 				shadowOpacity: 0.6,
 				shadowSize: 0,
@@ -21,11 +22,11 @@ function affichageJauge(fichierPhp){
 			//affiche le message indiquant la consommation dans la balise div message
 			$('#message').html('Cela correspond à : ');
 			if(data.valeur<8000){
-				$('#message').append('<img src="" />');
-			}else {
-				if(data.valeur<10000){
-				}else{
-				}
+				$('#message').append('<img class="image" src="image/radiateur.jpg" />');
+			}else if(data.valeur<10000){
+				$('#message').append('<img class="image" src="image/radiateur.jpg" />');
+			}else{
+				$('#message').append('<img class="image" src="image/radiateur.jpg" />');
 			}
 			//affiche la date de releve dans la balise div bottom
 			$('#bottom').html('Relevé le '+data.date);
