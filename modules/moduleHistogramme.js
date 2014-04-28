@@ -8,10 +8,13 @@ function affichageHistogramme(fichierPhp){
 		success:function(data){	
 			var ctx = $('#histogramme').get(0).getContext("2d");
 			var myNewChart = new Chart(ctx);
+			var options ={
+				scaleFontFamily : "'Eurostile'",
+				scaleFontColor : "#004A75",
+				scaleFontSize : 15
+			}
 			
-			var donneesHistogramme = data;
-			
-			new Chart(ctx).Bar(data);
+			new Chart(ctx).Bar(data,options);
 		}
 		
 	});
