@@ -1,9 +1,6 @@
 <?php
 	include_once "../calculMoyenne.php";
-	include_once "../connectBD.php";
-	
-	$bdd = connectBd();
-	
+		
 	$listLabel = array();
 	$listDonneesAnneePrecedente = array();
 	$listDonneesAnneeActuelle = array();
@@ -24,8 +21,8 @@
 	if(strtotime($date)!=strtotime(date("d-m-Y"))){
 	  
 	  for($i = 0; $i < 6; $i++){
-		array_push($listDonneesAnneePrecedente, moyenneMois($bdd,"serveur_est",$dateMoisAnneePrecedente));
-		array_push($listDonneesAnneeActuelle, moyenneMois($bdd,"serveur_est",$dateMoisAnneeActuelle));
+		array_push($listDonneesAnneePrecedente, moyenneMois("serveur_est",$dateMoisAnneePrecedente));
+		array_push($listDonneesAnneeActuelle, moyenneMois("serveur_est",$dateMoisAnneeActuelle));
 		$texteLabel = date("Y", strtotime($dateMoisAnneePrecedente))." ".date("F", strtotime($dateMoisAnneePrecedente))." ".date("Y", strtotime($dateMoisAnneeActuelle));
 		array_push($listLabel, $texteLabel);
 		$dateMoisAnneePrecedente = date("d-m-Y", strtotime($dateMoisAnneePrecedente."+1 month"));

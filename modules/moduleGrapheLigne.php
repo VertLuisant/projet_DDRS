@@ -1,9 +1,7 @@
 <?php
-	include_once "../connectBD.php";
 	include_once "../calculMoyenne.php";
 	include_once "../fonctions.php";
 	
-	$bdd = connectBD();
 	$numeroJour=date("N");
 	$ecart=7-$numeroJour;
 	$listLabel = array();
@@ -22,8 +20,8 @@
 	// on calclue le moyenne de consomation par deux heure
 	for($j=0;$j<7;$j++){
 		  for($i=0;$i<12;$i++){
-		    array_unshift($dataConsomme,round(moyenneParDeuxHeure($bdd,"extension_ouest",$dateActuelle)));
-		    array_unshift($dataConsommePrecedent,round(moyenneParDeuxHeure($bdd,"extension_ouest",$dateSemainePrecedent)));
+		    array_unshift($dataConsomme,round(moyenneParDeuxHeure("extension_ouest",$dateActuelle)));
+		    array_unshift($dataConsommePrecedent,round(moyenneParDeuxHeure("extension_ouest",$dateSemainePrecedent)));
 		    $dateActuelle=date("d-m-Y H:i:s",strtotime($dateActuelle."-2 hour"));
 		    $dateSemainePrecedent=date("d-m-Y H:i:s",strtotime($dateSemainePrecedent."-2 hour"));
 			array_push($listLabel, "");
