@@ -37,12 +37,18 @@ function affichageGrapheLigne(fichierPhp){
 			$('#titleGraphe').html('Consommation électrique de la semaine');
 			$('#titleSemainePrecedent').html('Semaine du '+data.dateDebutSemainePrecedente);
 			$('#titleSemaineActuelle').html('Semaine du '+data.dateDebutSemaineActuelle);
+			$('#semainePrecedente').width($('#grapheSemainePrecedente').width());
+			$('#semaineActuelle').width($('#grapheSemaineActuelle').width());
 			
 			var tailleDivJour = ($('#grapheSemainePrecedente').width()-70)/7;
 			
 			for (i = 0; i < 7; i++){
 				var contenuLabelSemainePrecedente = '<div class="labelJour" style="width:'+tailleDivJour+'px; ';
 				var contenuLabelSemaineActuelle = '<div class="labelJour" style="width:'+tailleDivJour+'px; ';
+				if(i == 0){
+					contenuLabelSemainePrecedente += 'margin-left:40px;';
+					contenuLabelSemaineActuelle += 'margin-left:40px;';
+				}
 				if(i == 6){
 					contenuLabelSemainePrecedente += 'border-right:3px solid rgba(0, 59, 11, 0.5);';
 					contenuLabelSemaineActuelle += 'border-right:3px solid rgba(0, 59, 11, 0.5);';
