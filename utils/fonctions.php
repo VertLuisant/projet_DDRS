@@ -1,48 +1,13 @@
 <?php
+//Contient toutes les fonctions générique php
 
-function editLabelSemaine($dateDebutSemaine){
-	$listLabel = array();
-	$dateActuelle = $dateDebutSemaine;
-	for($i = 1; $i<8; $i++){
-		switch ($i){
-		//lundi
-		case 1:
-			array_push($listLabel, "Lundi ".date("d", strtotime($dateActuelle)));
-			break;
-		//mardi
-		case 2:
-			array_push($listLabel, "Mardi ".date("d", strtotime($dateActuelle)));
-			break;
-		//mercredi
-		case 3:
-			array_push($listLabel, "Mercredi ".date("d", strtotime($dateActuelle)));
-			break;
-		//jeudi
-		case 4:
-			array_push($listLabel, "Jeudi ".date("d", strtotime($dateActuelle)));
-			break;
-		//vendredi
-		case 5:
-			array_push($listLabel, "Vendredi ".date("d", strtotime($dateActuelle)));
-			break;
-		//samedi
-		case 6:
-			array_push($listLabel, "Samedi ".date("d", strtotime($dateActuelle)));
-			break;
-		//dimanche
-		case 7:
-			array_push($listLabel, "Dimanche ".date("d", strtotime($dateActuelle)));
-			break;
-		}
-		$dateActuelle = date("d-m-Y", strtotime($dateActuelle."+1 day"));
-	}
-	return $listLabel;
-}
-
+//Permet de récupérer une chaine de caractere contenant la date passe en paramètre de façon "écrite"
 function ecritureDate($date){
 	return date("d", strtotime($date))." ".traduction(date("F", strtotime($date)))." ".date("Y", strtotime($date));
 }
 
+//Permet la traduction de mot anglais en mot français.
+//Si la traduction n'existe pas, retourne le mot anglais
 function traduction($motAnglais){
 	switch ($motAnglais) {
 		//traduction des jours
@@ -102,7 +67,7 @@ function traduction($motAnglais){
 			$motFrancais = "Novembre";
 			break;
 		case "December":
-			$motFrancais = "Decembre";
+			$motFrancais = "Décembre";
 			break;
 		default:
 			$motFrancais = $motAnglais;

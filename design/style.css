@@ -14,7 +14,7 @@
 	color: #004A75;
 }
 
-/* module 1 */
+/* module jauge */
 
 #jauge{
 	margin: auto;
@@ -44,7 +44,7 @@
 	color: rgba(0, 59, 11, 0.5);
 }
 
-/* module 2 */
+/* module grapheLigne */
 
 #semainePrecedente, #semaineActuelle{
 	margin:auto;
@@ -71,7 +71,7 @@
 	border-left:3px solid rgba(0, 59, 11, 0.5);
 }
 
-/* module 2 et 3 */
+/* module grapheLigne et histogramme */
 
 canvas {
 	display: block;

@@ -1,5 +1,5 @@
 <?php
-	include_once "../calculMoyenne.php";
+	include_once "../../utils/calculMoyenne.php";
 	
 	echo json_encode (array(
 							"valeur" => consommationActuelle(),

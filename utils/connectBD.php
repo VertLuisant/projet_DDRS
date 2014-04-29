@@ -1,10 +1,9 @@
 <?php
-//Permet la connexion a la base de donnees ainsi que la recuperation d'informations.
+//Permet la connexion à la base de données ainsi que la récuperation d'informations.
+
+$bdd; //variable globale permettant d'utiliser la connexion à la base de données
 
 // Connexion à la base de donnees
-
-$bdd;
-
 function connectBd(){
 	global $bdd;
 	$hote='ouebe.polytech.univ-montp2.fr';

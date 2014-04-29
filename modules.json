@@ -1,15 +1,15 @@
 {
 	"modules" : [
 		{
-			"nomFichierPhp" : "moduleJauge.php",
+			"nomFichierPhp" : "jauge.php",
 			"nomFonctionJs" : "affichageJauge"
 		},
 		{
-			"nomFichierPhp" : "moduleGrapheLigne.php",
+			"nomFichierPhp" : "grapheLigne.php",
 			"nomFonctionJs" : "affichageGrapheLigne"
 		},
 		{
-			"nomFichierPhp" : "moduleHistogramme.php",
+			"nomFichierPhp" : "histogramme.php",
 			"nomFonctionJs" : "affichageHistogramme"
 		}
 	]

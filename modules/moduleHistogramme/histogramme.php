@@ -1,16 +1,15 @@
 <?php
-	include_once "../calculMoyenne.php";
-			
-	//ouvert le fichier moduleHistogramme.json pour recuperer les donnees
-	$donnees=recupereLesDonnees("moduleHistogramme.json");
+	include_once "../../utils/calculMoyenne.php";
+	include_once "../../utils/fonctions.php";
+	
+	//On ouvre le fichier donneesHistogramme.json pour récupérer les données
+	$donnees=recupereLesDonnees("donneesHistogramme.json");
 	$date=date("d-m-Y",strtotime($donnees->dateDerniereMAJ));
 	
-	//si le date est différent que le date actuel, on recalcule les moyennes 
+	//si la date récupéré dans le fichier est différente de la date actuelle, on recalcule les moyennes 
 	if(strtotime($date)!=strtotime(date("d-m-Y"))){
-	
 	   recalculeMoyenneParMois();
-	   $donnees=recupereLesDonnees("moduleHistogramme.json");
-	   
+	   $donnees=recupereLesDonnees("donneesHistogramme.json");
 	}
 		
 	$donneesHistogramme = array(
@@ -31,48 +30,50 @@
 	echo json_encode ($donneesHistogramme);
 	
 	
-	//recuperer les donnees dans le fichier
+	//Permet de récupérer les données du fichier passé en paramètre
 	function recupereLesDonnees($filename){
 		$handle = fopen($filename, "r");
 		$contents = fread($handle, filesize($filename));
 		fclose($handle);
 		return json_decode($contents);
 	}
-	//ecrire les donnees dans le fichier 
+	
+	//Permet d'écrire les données $data au format JSON dans le fichier au nom $filename passé en paramètre
 	function ecrirelesDonnees($filename,$data){	
 			$handle = fopen($filename, "w");
-			fwrite($handle,$data);
+			fwrite($handle,json_encode($data));
 			fclose($handle); 
 	}
 	
-	// recalculer les moyennes par mois et les stocker dans le fichier moduleHistogramme.json
+	// Recalcule les moyennes mensuelles du mois actuel et des 5 derniers mois, pour l'année actuelle et l'année précédente
+	//ATTENTION : prend beaucoup de temps pour s'éxécuter (30s~1mn)
 	function recalculeMoyenneParMois(){
-	
 		$listLabel = array();
 		$listDonneesAnneePrecedente = array();
 		$listDonneesAnneeActuelle = array();
 		
-		//on commence 5 mois en arriere,au premier du mois
+		//on commence 5 mois en arrière, au premier du mois
 	    $dateMoisAnneePrecedente = date("d-m-Y", mktime(0, 0, 0, date("m")-5, 1, date("Y")-1));
 	    $dateMoisAnneeActuelle = date("d-m-Y", mktime(0, 0, 0, date("m")-5, 1, date("Y")));
 		
-		  for($i = 0; $i < 6; $i++){
+		//pour chaque mois on calcule la moyenne mensuelle pour l'année actuelle et l'année précédente
+		for($i = 0; $i < 6; $i++){
 			array_push($listDonneesAnneePrecedente, moyenneMois("serveur_est",$dateMoisAnneePrecedente));
 			array_push($listDonneesAnneeActuelle, moyenneMois("serveur_est",$dateMoisAnneeActuelle));
-			$texteLabel = date("Y", strtotime($dateMoisAnneePrecedente))." ".date("F", strtotime($dateMoisAnneePrecedente))." ".date("Y", strtotime($dateMoisAnneeActuelle));
+			$texteLabel = date("Y", strtotime($dateMoisAnneePrecedente))." ".traduction(date("F", strtotime($dateMoisAnneePrecedente)))." ".date("Y", strtotime($dateMoisAnneeActuelle));
 			array_push($listLabel, $texteLabel);
 			$dateMoisAnneePrecedente = date("d-m-Y", strtotime($dateMoisAnneePrecedente."+1 month"));
 			$dateMoisAnneeActuelle = date("d-m-Y", strtotime($dateMoisAnneeActuelle."+1 month"));
-			}
+		}
 			
-			$data=array(
-					"dateDerniereMAJ"=>date("d-m-Y"),
-					"listLabel"=>$listLabel,
-					"listDonneesAnneePrecedente"=>$listDonneesAnneePrecedente,
-					"listDonneesAnneeActuelle"=>$listDonneesAnneeActuelle
-					);
+		$data=array(
+				"dateDerniereMAJ"=>date("d-m-Y"),
+				"listLabel"=>$listLabel,
+				"listDonneesAnneePrecedente"=>$listDonneesAnneePrecedente,
+				"listDonneesAnneeActuelle"=>$listDonneesAnneeActuelle
+				);
 					
-		//stocker les donnees dans le fichier
-		ecrirelesDonnees("moduleHistogramme.json",json_encode($data));
+		//On stocke les données dans un fichier
+		ecrirelesDonnees("donneesHistogramme.json",$data);
 	}
 ?>
