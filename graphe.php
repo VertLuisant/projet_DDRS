@@ -28,7 +28,6 @@
 
 	//on construit le tableau des données que l'on va passé au javascript				
 	$donneesGrapheLigne = array(
-	   "donnees"=> array (
 			"labels"=> $resultatMoyenne['listLabel'],
 			"datasets" => array(
 				array(
@@ -37,8 +36,7 @@
 					"pointColor" => "rgba(0,166,214,0.5)",
 					"pointStrokeColor" => "#fff",
 					"data" =>$resultatMoyenne['consommation']
-				)
-			 )	
+					),
 			)
 	);
 	echo json_encode($donneesGrapheLigne);
@@ -82,7 +80,7 @@
 			
 			case "ouest_capteur1":
 				while(strtotime($dateActuelle)<=strtotime($dateFin)){
-					array_push($consommation,round(moyenneHeure("extention_ouest","Capteur1"$dateActuelle)));
+					array_push($consommation,round(moyenneHeure("extention_ouest","Capteur1",$dateActuelle)));
 					array_push($listLabel,date("d-m H",strtotime($dateActuelle)));
 			
 					$dateActuelle=date("d-m-Y H:i:s",strtotime($dateActuelle.'+1 hour'));
@@ -91,7 +89,7 @@
 			
 			case "ouest_capteur2":
 				while(strtotime($dateActuelle)<=strtotime($dateFin)){
-					array_push($consommation,round(moyenneHeure("extention_ouest","Capteur2"$dateActuelle)));
+					array_push($consommation,round(moyenneHeure("extention_ouest","Capteur2",$dateActuelle)));
 					array_push($listLabel,date("d-m H",strtotime($dateActuelle)));
 			
 					$dateActuelle=date("d-m-Y H:i:s",strtotime($dateActuelle.'+1 hour'));
@@ -100,7 +98,7 @@
 			
 			case "ouest_capteur3":
 				while(strtotime($dateActuelle)<=strtotime($dateFin)){
-					array_push($consommation,round(moyenneHeure("extention_ouest","Capteur3"$dateActuelle)));
+					array_push($consommation,round(moyenneHeure("extention_ouest","Capteur3",$dateActuelle)));
 					array_push($listLabel,date("d-m H",strtotime($dateActuelle)));
 			
 					$dateActuelle=date("d-m-Y H:i:s",strtotime($dateActuelle.'+1 hour'));

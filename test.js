@@ -19,7 +19,7 @@ var treeData =
     }
  ];
  
- var capteurChoisi;
+ var capteurChoisi=[];
  
 	$(function(){
 		// --- Initialize  tree
@@ -51,45 +51,43 @@ var treeData =
 			new JsDatePick({
 				useMode:2,
 				target:"calendarDateDebut",
-				dateFormat:"%d-%M-%Y"
+				dateFormat:"%d-%m-%Y"
 			});
 			new JsDatePick({
 				useMode:2,
 				target:"calendarDateFin",
-				dateFormat:"%d-%M-%Y"
+				dateFormat:"%d-%m-%Y"
 			});
 		};
 	  });
 	  
-	function dateToString(date){
-	 return date.getDate()+'-'+(date.getMonth()+1)+'-'+date.getFullYear();
-	}
    //recuper les options
 	function getss()
 	{
-	var dateDebut=new Date(document.getElementById("calendarDateDebut").value);  
-	var dateFin=new Date(document.getElementById("calendarDateFin").value);  
-	var moyenne=document.getElementById("moyenne").value;
+	var dateDebutDecompose = $('#calendarDateDebut').val().split("-");
+	var dateFinDecompose = $('#calendarDateFin').val().split("-");
+	var dateDebut=new Date(dateDebutDecompose[2],dateDebutDecompose[1]-1,dateDebutDecompose[0],0,0,0);  
+	var dateFin=new Date(dateFinDecompose[2],dateFinDecompose[1]-1,dateFinDecompose[0],0,0,0);   
+	var moyenne=$('#moyenne').val();
 	 if(dateDebut>dateFin){
 	  alert("date debut est superieur que date fin");
-	 }else if(document.getElementById("calendarDateDebut").value==""||document.getElementById("calendarDateFin").value==""){
+	 }else if($('#calendarDateDebut').val()==""||$('calendarDateFin').val()==""){
 	  alert("il faut choisir la date debut et la date fin");
 	 }
 	 if(capteurChoisi.length<1){
 	  alert("il faut choisir un capteur");
 	 }
 	 $('#echoSelection').text(capteurChoisi);
-	 var envoiDonnees=$.post("graphe.php",{"dateDebut":dateToString(dateDebut),"dateFin":dateToString(dateFin),"capteur":capteurChoisi,"moyenne":moyenne});
+	 var envoiDonnees=$.post("graphe.php",{"dateDebut":dateDebut,"dateFin":dateFin,"capteur":capteurChoisi,"moyenne":moyenne});
 
 	 envoiDonnees.done(function(data){
 			//On initialise le contenu de la balise div module
 			$('#module').html('');
 			$('#module').append('<div id="titleGraphe" class="title">Graphe</div>'
 								+ '<canvas id="graphe" width="1360" height="300" ></canvas>');
+			
+			var dataParse = $.parseJSON(data)
 				var options ={
-				scaleOverlay : true,
-				scaleOverride : true,
-				scaleStartValue : 0,
 				scaleFontFamily : "'Eurostile'",
 				scaleFontColor : "#004A75",
 				scaleFontSize : 13
@@ -97,6 +95,6 @@ var treeData =
 			//On affiche les deux graphiques
 			var ctx = $('#graphe').get(0).getContext("2d");
 			var chart = new Chart(ctx);
-			new Chart(ctx).Line(data.donnees,options);
+			new Chart(ctx).Line(dataParse,options);
 		});
 }
