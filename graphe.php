@@ -53,21 +53,58 @@
 		{
 		    switch($uncapteur){
 			 case "total":
-			 while(strtotime($dateActuelle)<=strtotime($dateFin)){
-				array_push($consommation,round(moyenneHeure("extension_ouest",$dateActuelle))+round(moyenneHeure("serveur_est",$dateActuelle)));
-				array_push($listLabel,date("d-m H",strtotime($dateActuelle)));
+				while(strtotime($dateActuelle)<=strtotime($dateFin)){
+					array_push($consommation,round(moyenneHeure("extension_ouest",$dateActuelle))+round(moyenneHeure("serveur_est",$dateActuelle)));
+					array_push($listLabel,date("d-m H",strtotime($dateActuelle)));
 			
-				$dateActuelle=date("d-m-Y H:i:s",strtotime($dateActuelle.'+1 hour'));
+					$dateActuelle=date("d-m-Y H:i:s",strtotime($dateActuelle.'+1 hour'));
 				}
 				break;
 				
 			case "batiment_est":
+			case "serveur_est":
+				while(strtotime($dateActuelle)<=strtotime($dateFin)){
+					array_push($consommation,round(moyenneHeure("serveur_est",$dateActuelle)));
+					array_push($listLabel,date("d-m H",strtotime($dateActuelle)));
+			
+					$dateActuelle=date("d-m-Y H:i:s",strtotime($dateActuelle.'+1 hour'));
+				}
 			break;
-			case "total":
+			
+			case "extention_ouest":
+				while(strtotime($dateActuelle)<=strtotime($dateFin)){
+					array_push($consommation,round(moyenneHeure("extention_ouest",$dateActuelle)));
+					array_push($listLabel,date("d-m H",strtotime($dateActuelle)));
+			
+					$dateActuelle=date("d-m-Y H:i:s",strtotime($dateActuelle.'+1 hour'));
+				}
 			break;
-			case "total":
+			
+			case "ouest_capteur1":
+				while(strtotime($dateActuelle)<=strtotime($dateFin)){
+					array_push($consommation,round(moyenneHeure("extention_ouest","Capteur1"$dateActuelle)));
+					array_push($listLabel,date("d-m H",strtotime($dateActuelle)));
+			
+					$dateActuelle=date("d-m-Y H:i:s",strtotime($dateActuelle.'+1 hour'));
+				}
 			break;
-			case "total":
+			
+			case "ouest_capteur2":
+				while(strtotime($dateActuelle)<=strtotime($dateFin)){
+					array_push($consommation,round(moyenneHeure("extention_ouest","Capteur2"$dateActuelle)));
+					array_push($listLabel,date("d-m H",strtotime($dateActuelle)));
+			
+					$dateActuelle=date("d-m-Y H:i:s",strtotime($dateActuelle.'+1 hour'));
+				}
+			break;
+			
+			case "ouest_capteur3":
+				while(strtotime($dateActuelle)<=strtotime($dateFin)){
+					array_push($consommation,round(moyenneHeure("extention_ouest","Capteur3"$dateActuelle)));
+					array_push($listLabel,date("d-m H",strtotime($dateActuelle)));
+			
+					$dateActuelle=date("d-m-Y H:i:s",strtotime($dateActuelle.'+1 hour'));
+				}
 			break;
 			}
 		}
@@ -97,11 +134,15 @@
 				
 			case "batiment_est":
 			break;
-			case "total":
+			case "serveur_est":
 			break;
-			case "total":
+			case "extention_ouest":
 			break;
-			case "total":
+			case "ouest_capteur1":
+			break;
+			case "ouest_capteur2":
+			break;
+			case "ouest_capteur3":
 			break;
 			}
 		}
@@ -131,11 +172,15 @@
 				
 			case "batiment_est":
 			break;
-			case "total":
+			case "serveur_est":
 			break;
-			case "total":
+			case "extention_ouest":
 			break;
-			case "total":
+			case "ouest_capteur1":
+			break;
+			case "ouest_capteur2":
+			break;
+			case "ouest_capteur3":
 			break;
 			}
 		}
@@ -154,19 +199,25 @@
 		{
 		    switch($uncapteur){
 			 case "total":
-			 while(strtotime($dateActuelle)<=strtotime($dateFin)){
-			array_push($consommation,round(moyenneMois("extension_ouest",$dateActuelle))+round(moyenneMois("serveur_est",$dateActuelle)));
-			array_push($listLabel,date("d-m",strtotime($dateActuelle)));
+				while(strtotime($dateActuelle)<=strtotime($dateFin)){
+					array_push($consommation,round(moyenneMois("extension_ouest",$dateActuelle))+round(moyenneMois("serveur_est",$dateActuelle)));
+					array_push($listLabel,date("d-m",strtotime($dateActuelle)));
 			
-			$dateActuelle=date("d-m-Y",strtotime($dateActuelle.'+1 month'));
-			}
+					$dateActuelle=date("d-m-Y",strtotime($dateActuelle.'+1 month'));
+				}
+			break;
+			
 			case "batiment_est":
 			break;
-			case "total":
+			case "serveur_est":
 			break;
-			case "total":
+			case "extention_ouest":
 			break;
-			case "total":
+			case "ouest_capteur1":
+			break;
+			case "ouest_capteur2":
+			break;
+			case "ouest_capteur3":
 			break;
 			}
 		}
