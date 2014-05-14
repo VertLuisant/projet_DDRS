@@ -3,19 +3,15 @@
 	include_once "../../utils/fonctions.php";
 	
 	$numeroJour=date("N");
-	$ecart=7-$numeroJour;
-	
-	//on calcule le dernier jour de la semaine actuelle et de la semaine précedente
-	$dateSemaineActuelle=date("d-m-Y H:i:s",mktime(24,0,0,date('m'),date('d')+$ecart,date('Y')));
-	$dateSemainePrecedent=date("d-m-Y H:i:s",strtotime($dateSemaineActuelle.'-1 week'));
+	$ecart=$numeroJour-1;
 	
 	//on calcule le premier jour de la semaine actuelle et de la semaine precedente
-	$dateActuelleDebut=date("d-m-Y",strtotime($dateSemaineActuelle.'-1 week'));
+	$dateActuelleDebut=date("d-m-Y H:i:s",mktime(0,0,0,date('m'),date('d')-$ecart,date('Y')));
 	$datePrecedentDebut=date("d-m-Y",strtotime($dateActuelleDebut.'-1 week'));
 	
 	
 	// on calcule les moyennes de consommation par deux heures
-	$resultatMoyenne=calculeMoyenneDeConsommation($dateSemaineActuelle,$dateSemainePrecedent);
+	$resultatMoyenne=calculeMoyenneDeConsommation($dateActuelleDebut,$datePrecedentDebut);
 	
 	//on construit le tableau des données que l'on va passé au javascript				
 	$donneesGrapheLigne = array(
@@ -60,7 +56,7 @@
 	
 		$valeurMax = 0;
 		
-		//ATTENTION : le calcul se fait depuis le dimanche 24h, jusqu'au lundi 00h
+		//ATTENTION : le calcul se fait depuis le lundi 00h, jusqu'au dimanche 10h
 		//pour chaque jour
 		for($j=0;$j<7;$j++){
 			//pour chaque paire d'heures
@@ -70,8 +66,8 @@
 				$consommationMoyennePourSemainePrecedente = round(moyenneParDeuxHeure("extension_ouest",$dateSemainePrecedent));
 				
 				//on les rajoute dans les tableaux correspondants
-				array_unshift($consommationSemaineActuelle, $consommationMoyennePourSemaineActuelle);
-				array_unshift($consommationSemainePrecedente, $consommationMoyennePourSemainePrecedente);
+				array_push($consommationSemaineActuelle, $consommationMoyennePourSemaineActuelle);
+				array_push($consommationSemainePrecedente, $consommationMoyennePourSemainePrecedente);
 				
 				//on met à jour la valeur maximale si besoin
 				if($consommationMoyennePourSemaineActuelle > $valeurMax){
@@ -82,9 +78,22 @@
 				}
 				
 				//on passe à la paire d'heure "précédentes"
-				$dateSemaineActuelle=date("d-m-Y H:i:s",strtotime($dateSemaineActuelle."-2 hour"));
-				$dateSemainePrecedent=date("d-m-Y H:i:s",strtotime($dateSemainePrecedent."-2 hour"));
-				array_push($listLabel, "");
+				$heure = date("H",strtotime($dateSemaineActuelle));
+				if($heure == 0){
+					$labelHeure = "00H";
+				}else if($heure == 6){
+					$labelHeure = " 6H";
+				}else if($heure == 12){
+					$labelHeure = "12H";
+				}else if($heure == 18){
+					$labelHeure = "18H";
+				}else {
+					$labelHeure = "";
+				}
+				array_push($listLabel, $labelHeure);
+				$dateSemaineActuelle=date("d-m-Y H:i:s",strtotime($dateSemaineActuelle."+2 hour"));
+				$dateSemainePrecedent=date("d-m-Y H:i:s",strtotime($dateSemainePrecedent."+2 hour"));
+				
 		}
 	 }
 	

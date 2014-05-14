@@ -31,14 +31,14 @@
 		<script type="text/javascript">
 			$.getJSON("modules.json.php", function(json) {
 				var i = 0;
-				changerModule(json.modules[i].nomFichierPhp, json.modules[i].nomFonctionJs);
-				setInterval(function(){
+				changerModule(json.modules[1].nomFichierPhp, json.modules[1].nomFonctionJs);
+				/*setInterval(function(){
 					i = i + 1;
 					if(i >= json.modules.length){
 						i = 0;
 					}
 					changerModule(json.modules[i].nomFichierPhp, json.modules[i].nomFonctionJs);
-				}, 15000);
+				}, 15000);*/
 			});
 		</script>
 	</body>

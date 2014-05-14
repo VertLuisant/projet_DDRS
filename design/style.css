@@ -51,7 +51,7 @@
 
 #semainePrecedente, #semaineActuelle{
 	margin:auto;
-	margin-top:-40px;
+	margin-top:-20px;
 	font-size: 20px;
 	font-family: 'Eurostile';
 	text-align: center;
@@ -74,6 +74,13 @@
 	border-left:3px solid rgba(0, 59, 11, 0.5);
 }
 
+.typeOrdonneLigne {
+	font-family: 'Eurostile';
+	margin-top: 15px;
+	margin-left: 32px;
+	color: #004A75;
+}
+
 /* module grapheLigne et histogramme */
 
 canvas {
@@ -82,14 +89,6 @@ canvas {
 	margin-bottom:15px;
 	width: 1300px;
 	height: 620px;
-}
-
-/* module grapheLigne */
-.typeOrdonneLigne {
-	font-family: 'Eurostile';
-	margin-top: 15px;
-	margin-left: 32px;
-	color: #004A75;
 }
 
 /* module histogramme */
