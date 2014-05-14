@@ -46,7 +46,6 @@
         <option value="Mois">Mois</option>
    </select>
    </div>
-  <div>Selected keys: <span id="echoSelection">-</span></div>
   <input name="submit" type="button" onclick="javascript:getss();" value="submit" />
  </form>
  <div id="module"></div>

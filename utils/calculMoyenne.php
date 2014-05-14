@@ -118,16 +118,13 @@ function moyenneJour($table,$date,$capteur=null){
 function moyenneSemaine($table,$date,$capteur=null){
 	global $debug;
 	
-	//on passe au début de la semaine, si ce n'est pas le cas
-	while(date("N", strtotime($date) > 1)){//tant qu'on est pas au lundi 
-		$date=date("d-m-Y",strtotime($date."-1 day")); //on enlève un jour
-	}
-	
-	//on calcule la moyenne de chaque jour, et on divise par 7
+	//on calcule la hebdomadaire de chaque jour, et on divise par 7
 	$somme=0;
-	for($i=0;$i<7;$i++){
+	for($i=0;$i<7;$i++){ 
 		$dateSemaine=date("d-m-Y H:i:s",strtotime($date."+".$i." days"));
+		if($debug) echo "<tr><td>".$dateSemaine."</td><td>";
 		$somme+=moyenneJour($table,$dateSemaine,$capteur);
+		if($debug) echo "</td></tr>";
 	}
 	$moyenneSemaine=$somme/7;
 	if($debug) echo "<p> Moyenne hebdomadaire -- Le : ".ecritureDate($date)." moyenne hebdomadaire : ".$moyenneSemaine." W</p>";

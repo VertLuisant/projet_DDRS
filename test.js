@@ -8,7 +8,7 @@ var treeData =
             {title: "serveur est", key: "serveur_est" }
           ]
         },
-        {title: "Extention ouest",key:"extention_ouest" ,
+        {title: "Extension ouest",key:"extension_ouest" ,
           children: [
             {title: "capteur 1", key: "ouest_capteur1" },
             {title: "capteur 2", key: "ouest_capteur2" },
@@ -77,9 +77,8 @@ var treeData =
 	 if(capteurChoisi.length<1){
 	  alert("il faut choisir un capteur");
 	 }
-	 $('#echoSelection').text(capteurChoisi);
-	 var envoiDonnees=$.post("graphe.php",{"dateDebut":dateDebut,"dateFin":dateFin,"capteur":capteurChoisi,"moyenne":moyenne});
-
+	 var envoiDonnees=$.post("graphe.php",{"dateDebut":dateDebut.getDate()+"-"+(dateDebut.getMonth()+1)+"-"+dateDebut.getFullYear(),"dateFin":dateFin.getDate()+"-"+(dateFin.getMonth()+1)+"-"+dateFin.getFullYear(),"capteur":capteurChoisi,"moyenne":moyenne});
+	 $('#module').html('<img class="image" src="design/loading.gif" />');
 	 envoiDonnees.done(function(data){
 			//On initialise le contenu de la balise div module
 			$('#module').html('');
@@ -90,7 +89,8 @@ var treeData =
 				var options ={
 				scaleFontFamily : "'Eurostile'",
 				scaleFontColor : "#004A75",
-				scaleFontSize : 13
+				scaleFontSize : 13,
+				pointDot:false
 			};
 			//On affiche les deux graphiques
 			var ctx = $('#graphe').get(0).getContext("2d");
