@@ -11,6 +11,7 @@
   <script type="text/javascript" src="js/jsDatePick.jquery.min.1.3.js"></script>
   <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1/jquery-ui.min.js" type="text/javascript"></script>
   <script type="text/javascript" src="js/jquery.fancytree.js" ></script>
+  <script type="text/javascript" src="js/Chart.min.js" ></script>
   <script type="text/javascript" src="test.js" ></script>
   <!-- (Irrelevant source removed.) -->
 
@@ -39,9 +40,10 @@
   <label for="labelMoyenne">moyenne</label>
   <div>
   <select id="moyenne" name="moyenne">
-        <option value="jour">Jour</option>
-        <option value="semaine">Semaine</option>
-        <option value="mois">Mois</option>
+		<option value="Heure">Heure</option>
+        <option value="Jour">Jour</option>
+        <option value="Semaine">Semaine</option>
+        <option value="Mois">Mois</option>
    </select>
    </div>
   <div>Selected keys: <span id="echoSelection">-</span></div>
