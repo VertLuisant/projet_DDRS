@@ -93,7 +93,7 @@ var treeData =
 				scaleFontFamily : "'Eurostile'",
 				scaleFontColor : "#004A75",
 				scaleFontSize : 13
-			}
+			};
 			//On affiche les deux graphiques
 			var ctx = $('#graphe').get(0).getContext("2d");
 			var chart = new Chart(ctx);

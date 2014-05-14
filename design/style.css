@@ -1,0 +1,101 @@
+/* Commun */
+
+@font-face {
+	font-family: 'Eurostile';
+	src: url('police/EurostileTMed.ttf');
+}
+
+.title{
+	margin: auto;
+	margin-top: 50px;
+	font-family: 'Eurostile';
+	font-size: 50px;
+	text-align: center;
+	color: #004A75;
+}
+
+/* module jauge */
+
+#jauge{
+	margin: auto;
+	margin-top:-20px;
+	width: 1200px;
+	height: 540px;
+}
+
+.image{
+	vertical-align:middle;
+	height: 120px;
+}
+
+#message{
+	margin: auto;
+	margin-top:10px;
+    font-size: 30px;
+	font-family: 'Eurostile';
+	text-align: center;
+	color: rgba(0, 156, 221, 1);
+}
+
+#bottom{
+	font-size: 15px;
+	font-family: 'Eurostile';
+	text-align: center;
+	color: rgba(0, 59, 11, 0.5);
+}
+
+#messageInfo{
+}
+
+/* module grapheLigne */
+
+#semainePrecedente, #semaineActuelle{
+	margin:auto;
+	margin-top:-40px;
+	font-size: 20px;
+	font-family: 'Eurostile';
+	text-align: center;
+	color: #004A75;
+}
+
+.nomSemaine{
+	margin: auto;
+	margin-top:40px;
+	margin-bottom:15px;
+	font-family: 'Eurostile';
+	font-size: 25px;
+	text-align: center;
+	color: rgba(0, 59, 11, 0.5);
+	clear:left;
+}
+
+.labelJour{
+	float:left;
+	border-left:3px solid rgba(0, 59, 11, 0.5);
+}
+
+/* module grapheLigne et histogramme */
+
+canvas {
+	display: block;
+	margin: auto;
+	margin-bottom:15px;
+	width: 1300px;
+	height: 620px;
+}
+
+/* module grapheLigne */
+.typeOrdonneLigne {
+	font-family: 'Eurostile';
+	margin-top: 15px;
+	margin-left: 32px;
+	color: #004A75;
+}
+
+/* module histogramme */
+.typeOrdonneHistogramme{
+	font-family: 'Eurostile';
+	margin-top: 15px;
+	margin-left: 90px;
+	color: #004A75;
+}
