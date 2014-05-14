@@ -6,10 +6,12 @@ function affichageGrapheLigne(fichierPhp){
 			//On initialise le contenu de la balise div module
 			$('#module').html('');
 			$('#module').append('<div id="titleGraphe" class="title"></div>'
-								+ '<canvas id="grapheSemainePrecedente" width="1360" height="300" ></canvas>'
+								+ '<div class="typeOrdonneLigne">W</div>'
+								+ '<canvas id="grapheSemainePrecedente" width="1300" height="300" ></canvas>'
 								+ '<div id="semainePrecedente"></div>'
 								+ '<div id="titleSemainePrecedent" class="nomSemaine"></div>'
-								+ '<canvas id="grapheSemaineActuelle" width="1360" height="300"></canvas>'
+								+ '<div class="typeOrdonneLigne"> W </div>'
+								+ '<canvas id="grapheSemaineActuelle" width="1300" height="300"></canvas>'
 								+ '<div id="semaineActuelle"></div>'
 								+ '<div id="titleSemaineActuelle" class="nomSemaine"></div>');
 								
@@ -18,11 +20,12 @@ function affichageGrapheLigne(fichierPhp){
 				scaleOverlay : true,
 				scaleOverride : true,
 				scaleSteps : 10,
-				scaleStepWidth : ((data.valeurMax - 0) / 10),
+				scaleStepWidth : data.echelle,
 				scaleStartValue : 0,
 				scaleFontFamily : "'Eurostile'",
 				scaleFontColor : "#004A75",
-				scaleFontSize : 13
+				scaleFontSize : 13,
+				animation : false
 			}
 			
 			//On affiche les deux graphiques
@@ -35,14 +38,14 @@ function affichageGrapheLigne(fichierPhp){
 			new Chart(ctx2).Line(data.dateSemaineActuelle,options);
 			
 			//On affiche les titres du graphiques dans les balises prévues à cet effet
-			$('#titleGraphe').html('Consommation électrique de la semaine');
+			$('#titleGraphe').html('Consommation électrique du bâtiment 31 par semaine');
 			$('#titleSemainePrecedent').html('Semaine du '+data.dateDebutSemainePrecedente);
 			$('#titleSemaineActuelle').html('Semaine du '+data.dateDebutSemaineActuelle);
 			
 			//On génère la liste des labels présents sous les graphiques
 			$('#semainePrecedente').width($('#grapheSemainePrecedente').width());
 			$('#semaineActuelle').width($('#grapheSemaineActuelle').width());
-			var tailleDivJour = ($('#grapheSemainePrecedente').width()-70)/7;
+			var tailleDivJour = ($('#grapheSemainePrecedente').width()-78)/7;
 			
 			for (i = 0; i < 7; i++){
 				var contenuLabelSemainePrecedente = '<div class="labelJour" style="width:'+tailleDivJour+'px; ';

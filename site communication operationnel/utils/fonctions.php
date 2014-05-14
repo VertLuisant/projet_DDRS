@@ -1,6 +1,19 @@
 <?php
 //Contient toutes les fonctions générique php
 
+//Retourne la valeur de l'échelle pour un graphique ayant la valeur maximale $valeurMax et un nombre de pas $nombreDePas
+//L'échelle est forcément un multiple de 500, pour des soucis de lisibilités des graphiques
+//Exemple : calculEchelle(20000, 10) retournera 2000 car il faut une échelle de 2000 pour 10 pas afin d'afficher le graphique sans perte
+function calculEchelle($valeurMax, $nombreDePas){
+	$echelle = 500;
+	$nombreDePas = $valeurMax / $echelle;
+	while($nombreDePas > 10){
+		$echelle = $echelle + 500;
+		$nombreDePas = $valeurMax / $echelle;
+	}
+	return $echelle;
+}
+
 //Permet de récupérer une chaine de caractere contenant la date passe en paramètre de façon "écrite"
 function ecritureDate($date){
 	return date("d", strtotime($date))." ".traduction(date("F", strtotime($date)))." ".date("Y", strtotime($date));
@@ -12,62 +25,62 @@ function traduction($motAnglais){
 	switch ($motAnglais) {
 		//traduction des jours
 		case "Monday":
-			$motFrancais = "Lundi";
+			$motFrancais = "lundi";
 			break;
 		case "Tuesday":
-			$motFrancais = "Mardi";
+			$motFrancais = "mardi";
 			break;
 		case "Wednesday":
-			$motFrancais = "Mercredi";
+			$motFrancais = "mercredi";
 			break;
 		case "Thursday":
-			$motFrancais = "Jeudi";
+			$motFrancais = "jeudi";
 			break;
 		case "Friday":
-			$motFrancais = "Vendredi";
+			$motFrancais = "vendredi";
 			break;
 		case "Saturday":
-			$motFrancais = "Samedi";
+			$motFrancais = "samedi";
 			break;
 		case "Sunday":
-			$motFrancais = "Dimanche";
+			$motFrancais = "dimanche";
 			break;
 		//traduction des mois
 		case "January":
-			$motFrancais = "Janvier";
+			$motFrancais = "janvier";
 			break;
 		case "February":
-			$motFrancais = "Février";
+			$motFrancais = "février";
 			break;
 		case "March":
-			$motFrancais = "Mars";
+			$motFrancais = "mars";
 			break;
 		case "April":
-			$motFrancais = "Avril";
+			$motFrancais = "avril";
 			break;
 		case "May":
-			$motFrancais = "Mai";
+			$motFrancais = "mai";
 			break;
 		case "June":
-			$motFrancais = "Juin";
+			$motFrancais = "juin";
 			break;
 		case "July":
-			$motFrancais = "Juillet";
+			$motFrancais = "juillet";
 			break;
 		case "August":
-			$motFrancais = "Août";
+			$motFrancais = "août";
 			break;
 		case "September":
-			$motFrancais = "Septembre";
+			$motFrancais = "septembre";
 			break;
 		case "October":
-			$motFrancais = "Octobre";
+			$motFrancais = "octobre";
 			break;
 		case "November":
-			$motFrancais = "Novembre";
+			$motFrancais = "novembre";
 			break;
 		case "December":
-			$motFrancais = "Décembre";
+			$motFrancais = "décembre";
 			break;
 		default:
 			$motFrancais = $motAnglais;

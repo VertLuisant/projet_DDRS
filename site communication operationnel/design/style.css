@@ -20,21 +20,21 @@
 	margin: auto;
 	margin-top:-20px;
 	width: 1200px;
-	height: 600px;
+	height: 540px;
 }
 
 .image{
 	vertical-align:middle;
-	height:80px;
+	height: 120px;
 }
 
 #message{
 	margin: auto;
 	margin-top:10px;
-    font-size: 40px;
+    font-size: 30px;
 	font-family: 'Eurostile';
 	text-align: center;
-	color: #004A75;
+	color: rgba(0, 156, 221, 1);
 }
 
 #bottom{
@@ -42,6 +42,9 @@
 	font-family: 'Eurostile';
 	text-align: center;
 	color: rgba(0, 59, 11, 0.5);
+}
+
+#messageInfo{
 }
 
 /* module grapheLigne */
@@ -76,8 +79,23 @@
 canvas {
 	display: block;
 	margin: auto;
-	margin-top:15px;
 	margin-bottom:15px;
 	width: 1300px;
 	height: 620px;
+}
+
+/* module grapheLigne */
+.typeOrdonneLigne {
+	font-family: 'Eurostile';
+	margin-top: 15px;
+	margin-left: 32px;
+	color: #004A75;
+}
+
+/* module histogramme */
+.typeOrdonneHistogramme{
+	font-family: 'Eurostile';
+	margin-top: 15px;
+	margin-left: 90px;
+	color: #004A75;
 }

@@ -3,29 +3,47 @@
 	include_once "../../utils/fonctions.php";
 	
 	//On ouvre le fichier donneesHistogramme.json pour récupérer les données
-	$donnees=recupereLesDonnees("donneesHistogramme.json");
+	$donnees=recupereLesDonnees("donneesHistogramme.json.php");
 	$date=date("d-m-Y",strtotime($donnees->dateDerniereMAJ));
 	
 	//si la date récupéré dans le fichier est différente de la date actuelle, on recalcule les moyennes 
 	if(strtotime($date)!=strtotime(date("d-m-Y"))){
 	   recalculeMoyenneParMois();
-	   $donnees=recupereLesDonnees("donneesHistogramme.json");
+	   $donnees=recupereLesDonnees("donneesHistogramme.json.php");
 	}
-		
+	
+	//on recupère la valeur maximale afin de calculer l'échelle du diagramme par la suite
+	$valeurMax = 0;
+	foreach ($donnees->listDonneesAnneePrecedente as $value){
+		if($value > $valeurMax){
+			$valeurMax = $value;
+		}
+	}
+	foreach ($donnees->listDonneesAnneeActuelle as $value){
+		if($value > $valeurMax){
+			$valeurMax = $value;
+		}
+	}
+	
+	
+	
 	$donneesHistogramme = array(
-		"labels" => $donnees->listLabel,
-		"datasets" => array(
-			array(
-				"fillColor" => "rgba(0,156,221,0.5)",
-				"strokeColor" => "rgba(0,156,221,0.5)",
-				"data" => $donnees->listDonneesAnneePrecedente,
-			),
-			array(
-				"fillColor" => "rgba(0,90,150,0.7)",
-				"strokeColor" => "rgba(0,90,150,0.7)",
-				"data" => $donnees->listDonneesAnneeActuelle
+		"donnees" => array(
+			"labels" => $donnees->listLabel,
+			"datasets" => array(
+				array(
+					"fillColor" => "rgba(0,156,221,0.5)",
+					"strokeColor" => "rgba(0,156,221,0.5)",
+					"data" => $donnees->listDonneesAnneePrecedente,
+				),
+				array(
+					"fillColor" => "rgba(0,90,150,0.7)",
+					"strokeColor" => "rgba(0,90,150,0.7)",
+					"data" => $donnees->listDonneesAnneeActuelle
+				)
 			)
-		)	
+		),
+		"echelle" => calculEchelle($valeurMax, 10)
 	);
 	echo json_encode ($donneesHistogramme);
 	
@@ -74,6 +92,6 @@
 				);
 					
 		//On stocke les données dans un fichier
-		ecrirelesDonnees("donneesHistogramme.json",$data);
+		ecrirelesDonnees("donneesHistogramme.json.php",$data);
 	}
 ?>
