@@ -113,8 +113,7 @@ var treeData =
 			envoiDonnees.done(function(data){
 				//On initialise le contenu de la balise div Graphique
 				$('#graphique').html('');
-				$('#graphique').append('<div id="titleGraphe" class="title">Graphe</div>'
-										+ '<canvas id="graphe" width="1360" height="300" ></canvas>');	
+				$('#graphique').append('<canvas id="graphe" width="1360" height="300" ></canvas>');	
 				var dataParse = $.parseJSON(data)
 				var options ={
 					scaleFontFamily : "'Eurostile'",
@@ -128,12 +127,15 @@ var treeData =
 				var chart = new Chart(ctx);
 				new Chart(ctx).Line(dataParse,options);
 				
-				//legnede du graphique
-				$('#graphique').append('<ul>Legende : '
-										+'<li>img fdffs </li>'
-										+'<li>img fdffs </li>'
-										+'<li>img fdffs </li>'
-										+'</ul>');
+				//legende du graphique
+				$('#graphique').append('<table> <tr><td>Legende : </td>'
+										+'<td bgcolor="#FF0033" style="width:10px;"></td><td>Total</td>'
+										+'<td bgcolor="#FF6600" style="width:10px;"></td><td>Batiment est</td>'
+										+'<td bgcolor="#FFFF00" style="width:10px;"></td><td>Serveur est</td>'
+										+'<td bgcolor="#00CC00" style="width:10px;"></td><td>Capteur1</td>'
+										+'<td bgcolor="#0033FF" style="width:10px;"></td><td>Capteur2</td>'
+										+'<td bgcolor="#990099" style="width:10px;"></td><td>Capteur3</td>'
+										+'</tr></table>');
 										
 				//donnees invisible pour export
 				$('#graphique').append('<span class="invisible" id="dateDebutChoisi" >'+$('#calendarDateDebut').val()+'</span>');
