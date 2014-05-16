@@ -39,6 +39,7 @@
 	$moyenne=$_POST["moyenne"];
 
 	if($moyenne=="Heure"){
+		$dateFin=date("d-m-Y H:i:s", mktime(23, 0, 0, date("m",strtotime($dateFin)), date("d",strtotime($dateFin)),date("Y",strtotime($dateFin))));
 		$donneesGrapheLigne=calculeParHeure($dateDebut,$dateFin,$capteur);
 	}elseif($moyenne=="Jour"){
 		$donneesGrapheLigne=calculeParJour($dateDebut,$dateFin,$capteur);
@@ -75,7 +76,7 @@
 			 case "total":
 				while(strtotime($dateActuelle)<=strtotime($dateFin)){
 					array_push($consommation,round(moyenneHeure("extension_ouest",$dateActuelle))+round(moyenneHeure("serveur_est",$dateActuelle)));
-					array_push($listLabel,date("d-m H",strtotime($dateActuelle)));
+					array_push($listLabel,date("d-m H\H",strtotime($dateActuelle)));
 			
 					$dateActuelle=date("d-m-Y H:i:s",strtotime($dateActuelle.'+1 hour'));
 				}
@@ -89,7 +90,7 @@
 			case "batiment_est":
 				while(strtotime($dateActuelle)<=strtotime($dateFin)){
 					array_push($consommation,round(moyenneHeure("serveur_est",$dateActuelle)));
-					array_push($listLabel,date("d-m H",strtotime($dateActuelle)));
+					array_push($listLabel,date("d-m H\H",strtotime($dateActuelle)));
 			
 					$dateActuelle=date("d-m-Y H:i:s",strtotime($dateActuelle.'+1 hour'));
 				}
@@ -103,7 +104,7 @@
 			case "serveur_est":
 				while(strtotime($dateActuelle)<=strtotime($dateFin)){
 					array_push($consommation,round(moyenneHeure("serveur_est",$dateActuelle)));
-					array_push($listLabel,date("d-m H",strtotime($dateActuelle)));
+					array_push($listLabel,date("d-m H\H",strtotime($dateActuelle)));
 			
 					$dateActuelle=date("d-m-Y H:i:s",strtotime($dateActuelle.'+1 hour'));
 				}
@@ -117,7 +118,7 @@
 			case "extension_ouest":
 				while(strtotime($dateActuelle)<=strtotime($dateFin)){
 					array_push($consommation,round(moyenneHeure("extension_ouest",$dateActuelle)));
-					array_push($listLabel,date("d-m H",strtotime($dateActuelle)));
+					array_push($listLabel,date("d-m H\H",strtotime($dateActuelle)));
 			
 					$dateActuelle=date("d-m-Y H:i:s",strtotime($dateActuelle.'+1 hour'));
 				}
@@ -131,7 +132,7 @@
 			case "ouest_capteur1":
 				while(strtotime($dateActuelle)<=strtotime($dateFin)){
 					array_push($consommation,round(moyenneHeure("extension_ouest",$dateActuelle,"Capteur1")));
-					array_push($listLabel,date("d-m H",strtotime($dateActuelle)));
+					array_push($listLabel,date("d-m H\H",strtotime($dateActuelle)));
 			
 					$dateActuelle=date("d-m-Y H:i:s",strtotime($dateActuelle.'+1 hour'));
 				}
@@ -145,7 +146,7 @@
 			case "ouest_capteur2":
 				while(strtotime($dateActuelle)<=strtotime($dateFin)){
 					array_push($consommation,round(moyenneHeure("extension_ouest",$dateActuelle,"Capteur2")));
-					array_push($listLabel,date("d-m H",strtotime($dateActuelle)));
+					array_push($listLabel,date("d-m H\H",strtotime($dateActuelle)));
 			
 					$dateActuelle=date("d-m-Y H:i:s",strtotime($dateActuelle.'+1 hour'));
 				}
@@ -159,7 +160,7 @@
 			case "ouest_capteur3":
 				while(strtotime($dateActuelle)<=strtotime($dateFin)){
 					array_push($consommation,round(moyenneHeure("extension_ouest",$dateActuelle,"Capteur3")));
-					array_push($listLabel,date("d-m H",strtotime($dateActuelle)));
+					array_push($listLabel,date("d-m H\H",strtotime($dateActuelle)));
 			
 					$dateActuelle=date("d-m-Y H:i:s",strtotime($dateActuelle.'+1 hour'));
 				}

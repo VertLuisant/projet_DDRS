@@ -97,4 +97,24 @@ var treeData =
 			var chart = new Chart(ctx);
 			new Chart(ctx).Line(dataParse,options);
 		});
+	}
+	
+	function exportDonnees()
+	{
+	var dateDebutDecompose = $('#calendarDateDebut').val().split("-");
+	var dateFinDecompose = $('#calendarDateFin').val().split("-");
+	var dateDebut=new Date(dateDebutDecompose[2],dateDebutDecompose[1]-1,dateDebutDecompose[0],0,0,0);  
+	var dateFin=new Date(dateFinDecompose[2],dateFinDecompose[1]-1,dateFinDecompose[0],0,0,0);   
+	 if(dateDebut>dateFin){
+	  alert("date debut est superieur que date fin");
+	 }else if($('#calendarDateDebut').val()==""||$('calendarDateFin').val()==""){
+	  alert("il faut choisir la date debut et la date fin");
+	 }
+	 if(capteurChoisi.length<1){
+	  alert("il faut choisir un capteur");
+	 }
+	 
+	 dateDebut=dateDebut.getDate()+"-"+(dateDebut.getMonth()+1)+"-"+dateDebut.getFullYear();
+	 dateFin=dateFin.getDate()+"-"+(dateFin.getMonth()+1)+"-"+dateFin.getFullYear();				
+	 window.location="exportDonnees.php?dateDebut="+dateDebut+"&dateFin="+dateFin+"&capteurChoisi="+capteurChoisi;
 }

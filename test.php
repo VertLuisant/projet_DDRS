@@ -16,27 +16,45 @@
   <!-- (Irrelevant source removed.) -->
 
 <style type="text/css">
-.box{ margin:0 auto; float:right;}
+.box{ margin:0 auto; float:left;}
 .cacheElem{ margin : 5px; padding:10px; border:1px solid #E4E4E4; color:#333 }
 .infoElem{margin-left: 5px; display: inline-block;}
 </style>
 
 <script type="text/javascript">
-
+$(function(){
+	$("#hide").hide();
+	$("#question").hover(function(){
+		$("#hide").show(500);
+		});
+	$("#question").mouseout(function(){
+		$("#hide").hide(500);
+		})
+	})
 </script>
 </head>
 
 <body>
 
  
-  <form id="form1" name="form1" method="post" action="">
+  <form id="form1" name="form1" method="get" action="">
   <label for="dateDebut">Date Debut</label>
-  <div> <input type="text" size="12" id="calendarDateDebut" /> </div>
+  <div> <input type="text" size="12" id="calendarDateDebut" name="dateDebut" /> </div>
   <label for="dateFin">Date Fin</label>
   <div> <input type="text" size="12" id="calendarDateFin" /> </div>
   <!-- Tree -->
   <label for="capteur">Capteur</label>
-  <div id="tree"> </div>
+   <div class="box">
+		<img class="image" id="question" src="design/image/question.png" />
+        <div id="hide">
+          <p> Total :</p>
+		  <p> Batiment est : </p>
+		  <p> serveur est :</p>
+		  <p> Extension ouest :</p>
+	</div><!--end:hide-->
+	 <div id="tree"> </div>
+  </div>
+
   <label for="labelMoyenne">moyenne</label>
   <div>
   <select id="moyenne" name="moyenne">
@@ -47,8 +65,11 @@
    </select>
    </div>
   <input name="submit" type="button" onclick="javascript:getss();" value="submit" />
+
+<div id="module"></div>
+ 
+ <input name="export" type="button" onclick="exportDonnees();" value="Export" />
  </form>
- <div id="module"></div>
   <!-- (Irrelevant source removed.) -->
 </body>
 </html>
