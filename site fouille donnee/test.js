@@ -67,61 +67,92 @@ var treeData =
  var capteurChoisi=[];
 	  
    //recuper les options
-	function getss()
-	{
-	var dateDebutDecompose = $('#calendarDateDebut').val().split("-");
-	var dateFinDecompose = $('#calendarDateFin').val().split("-");
-	var dateDebut=new Date(dateDebutDecompose[2],dateDebutDecompose[1]-1,dateDebutDecompose[0],0,0,0);  
-	var dateFin=new Date(dateFinDecompose[2],dateFinDecompose[1]-1,dateFinDecompose[0],0,0,0);   
-	var moyenne=$('#moyenne').val();
-	 if(dateDebut>dateFin){
-	  alert("date debut est superieur que date fin");
-	 }else if($('#calendarDateDebut').val()==""||$('calendarDateFin').val()==""){
-	  alert("il faut choisir la date debut et la date fin");
-	 }
-	 if(capteurChoisi.length<1){
-	  alert("il faut choisir un capteur");
-	 }
-	 var envoiDonnees=$.post("graphe.php",{"dateDebut":dateDebut.getDate()+"-"+(dateDebut.getMonth()+1)+"-"+dateDebut.getFullYear(),"dateFin":dateFin.getDate()+"-"+(dateFin.getMonth()+1)+"-"+dateFin.getFullYear(),"capteur":capteurChoisi,"moyenne":moyenne});
-	 $('#graphique').html('<img class="image" src="design/loading.gif" />');
-	 envoiDonnees.done(function(data){
-			//On initialise le contenu de la balise div Graphique
-			$('#graphique').html('');
-			$('#graphique').append('<div id="titleGraphe" class="title">Graphe</div>'
-								+ '<canvas id="graphe" width="1360" height="300" ></canvas>');
+	function getss(){
+		$('#messageErreur').html('');
+		$('#messageAttention').html('');
+		$('#graphique').html('');
+		var dateDebutDecompose = $('#calendarDateDebut').val().split("-");
+		var dateFinDecompose = $('#calendarDateFin').val().split("-");
+		var moyenne=$('#moyenne').val();
+		
+		var erreur = false;
+		if(capteurChoisi.length<1){
+			//aucun capteur sélectionné
+			$('#messageErreur').append('<br />Vous n\'avez pas choisi de capteur');
+			$('#messageErreur').fadeIn("normal");
+			erreur = true;
+		}
+		if($('#calendarDateDebut').val()==""||$('calendarDateFin').val()==""){
+			//date(s) non renseignée(s)
+			$('#messageErreur').append('<br />Il faut renseigner la date de debut et la date de fin');
+			$('#messageErreur').fadeIn("normal");
+			erreur = true;
+		}else{
+			var dateDebut=new Date(dateDebutDecompose[2],dateDebutDecompose[1]-1,dateDebutDecompose[0],0,0,0);  
+			var dateFin=new Date(dateFinDecompose[2],dateFinDecompose[1]-1,dateFinDecompose[0],0,0,0);   
+			if($('#calendarDateDebut').val() == $('#calendarDateFin').val() && moyenne != "Heure"){
+				$('#messageErreur').append('<br />La période sélectionné ne contient qu\'une valeur, l\'affichage ne pourra pas fonctionner');
+				$('#messageErreur').fadeIn("slow");
+				erreur = true;
+			}
+			if(dateDebut>dateFin){
+				//date de début supérieure à date de fin
+				$('#messageErreur').append('<br />La date de début est supérieure à la date de fin');
+				$('#messageErreur').fadeIn("slow");
+				erreur = true;
+			}
+		}
+		
+		if(erreur == false){
+			//aucune erreur
+			var envoiDonnees=$.post("graphe.php",{"dateDebut":dateDebut.getDate()+"-"+(dateDebut.getMonth()+1)+"-"+dateDebut.getFullYear(),"dateFin":dateFin.getDate()+"-"+(dateFin.getMonth()+1)+"-"+dateFin.getFullYear(),"capteur":capteurChoisi,"moyenne":moyenne});
+			$('#graphique').append('<img class="image" src="design/loading.gif" />'
+									+ '<p>Le calcul peut prendre un peu de temps suivant la période sélectionnée. <br />'
+									+ 'Veuillez patientez...</p>');
 			
-			var dataParse = $.parseJSON(data)
+			envoiDonnees.done(function(data){
+				//On initialise le contenu de la balise div Graphique
+				$('#graphique').html('');
+				$('#graphique').append('<div id="titleGraphe" class="title">Graphe</div>'
+										+ '<canvas id="graphe" width="1360" height="300" ></canvas>');	
+				var dataParse = $.parseJSON(data)
 				var options ={
-				scaleFontFamily : "'Eurostile'",
-				scaleFontColor : "#004A75",
-				scaleFontSize : 13,
-				pointDot:false
-			};
-			//On affiche les deux graphiques
-			var ctx = $('#graphe').get(0).getContext("2d");
-			var chart = new Chart(ctx);
-			new Chart(ctx).Line(dataParse,options);
-			
-			$('#graphique').append('<input name="export" type="button" onclick="exportDonnees();" value="Export" />');
-		});
+					scaleFontFamily : "'Eurostile'",
+					scaleFontColor : "#004A75",
+					scaleFontSize : 13,
+					pointDot:false
+				};
+				
+				//On affiche le graphique
+				var ctx = $('#graphe').get(0).getContext("2d");
+				var chart = new Chart(ctx);
+				new Chart(ctx).Line(dataParse,options);
+				
+				//legnede du graphique
+				$('#graphique').append('<ul>Legende : '
+										+'<li>img fdffs </li>'
+										+'<li>img fdffs </li>'
+										+'<li>img fdffs </li>'
+										+'</ul>');
+										
+				//donnees invisible pour export
+				$('#graphique').append('<span class="invisible" id="dateDebutChoisi" >'+$('#calendarDateDebut').val()+'</span>');
+				$('#graphique').append('<span class="invisible" id="dateFinChoisi" >'+$('#calendarDateFin').val()+'</span>');
+				//bouton export
+				$('#graphique').append('<input name="export" type="button" onclick="exportDonnees();" value="Export" />');
+				
+				
+			});
+		}
 	}
 	
-	function exportDonnees()
-	{
-	var dateDebutDecompose = $('#calendarDateDebut').val().split("-");
-	var dateFinDecompose = $('#calendarDateFin').val().split("-");
-	var dateDebut=new Date(dateDebutDecompose[2],dateDebutDecompose[1]-1,dateDebutDecompose[0],0,0,0);  
-	var dateFin=new Date(dateFinDecompose[2],dateFinDecompose[1]-1,dateFinDecompose[0],0,0,0);   
-	 if(dateDebut>dateFin){
-	  alert("date debut est superieur que date fin");
-	 }else if($('#calendarDateDebut').val()==""||$('calendarDateFin').val()==""){
-	  alert("il faut choisir la date debut et la date fin");
-	 }
-	 if(capteurChoisi.length<1){
-	  alert("il faut choisir un capteur");
-	 }
-	 
-	 dateDebut=dateDebut.getDate()+"-"+(dateDebut.getMonth()+1)+"-"+dateDebut.getFullYear();
-	 dateFin=dateFin.getDate()+"-"+(dateFin.getMonth()+1)+"-"+dateFin.getFullYear();				
-	 window.location="exportDonnees.php?dateDebut="+dateDebut+"&dateFin="+dateFin+"&capteurChoisi="+capteurChoisi;
+	function exportDonnees(){
+		var dateDebutDecompose = $('#dateDebutChoisi').val().split("-");
+		var dateFinDecompose = $('#dateFinChoisi').val().split("-");
+		var dateDebut=new Date(dateDebutDecompose[2],dateDebutDecompose[1]-1,dateDebutDecompose[0],0,0,0);  
+		var dateFin=new Date(dateFinDecompose[2],dateFinDecompose[1]-1,dateFinDecompose[0],0,0,0);   
+		
+		dateDebut=dateDebut.getDate()+"-"+(dateDebut.getMonth()+1)+"-"+dateDebut.getFullYear();
+		dateFin=dateFin.getDate()+"-"+(dateFin.getMonth()+1)+"-"+dateFin.getFullYear();				
+		window.location="exportDonnees.php?dateDebut="+dateDebut+"&dateFin="+dateFin+"&capteurChoisi="+capteurChoisi;
 }

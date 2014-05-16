@@ -22,6 +22,14 @@ h3{
 	color: #004A75;
 }
 
+li {
+display:inline;
+}
+
+.invisible{
+	display:none;
+}
+
 .nomADefinir{
 	font-weight: bold;
 	text-decoration: underline;

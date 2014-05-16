@@ -74,10 +74,9 @@
 			</div>
 			
 			<input type="button" onclick="javascript:getss();" value="Recherche" />
-
-			<div id="graphique"></div>
-			 
-			
 		</form>
+		<div id="messageErreur"></div>
+		<div id="messageAttention"></div>
+		<div id="graphique"></div>
 	</body>
 </html>
