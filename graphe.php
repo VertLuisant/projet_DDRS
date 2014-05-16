@@ -2,6 +2,12 @@
 	include_once "utils/calculMoyenne.php";
 	include_once "utils/fonctions.php";
 	
+	//
+	$dateDebut=$_POST["dateDebut"];	
+	$dateFin=$_POST["dateFin"];
+	$capteur=$_POST["capteur"];
+	$moyenne=$_POST["moyenne"];
+	// col
 	$color = array(
 	   "colortotal"=>array(
 					"fillColor" => "rgba(255, 0, 51, 0.5)",
@@ -33,10 +39,7 @@
 	   ),
 	);
 	
-	$dateDebut=$_POST["dateDebut"];	
-	$dateFin=$_POST["dateFin"];
-	$capteur=$_POST["capteur"];
-	$moyenne=$_POST["moyenne"];
+	
 
 	if($moyenne=="Heure"){
 		$dateFin=date("d-m-Y H:i:s", mktime(23, 0, 0, date("m",strtotime($dateFin)), date("d",strtotime($dateFin)),date("Y",strtotime($dateFin))));

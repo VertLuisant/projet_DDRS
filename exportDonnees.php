@@ -1,22 +1,21 @@
 <?php
-include_once "utils/connectBD.php";
+
 include_once "utils/calculMoyenne.php";
 
-
-
 header('Content-Type: application/vnd.ms-excel');
+// data.csv :nom de file exporté
 header('Content-Disposition: attachment;filename="data.csv"');
 header('Cache-Control: max-age=0');
 
-
+//recuperer les paramètres 
 $dateDebut=$_GET["dateDebut"];
-$dateFin=$_GET["dateFin"];
-$dateFin=date("d-m-Y H:i:s", mktime(23, 0, 0, date("m",strtotime($dateFin)), date("d",strtotime($dateFin)),date("Y",strtotime($dateFin))));
+$dateFin=date("d-m-Y H:i:s", mktime(23, 0, 0, date("m",strtotime($_GET["dateFin"])), date("d",strtotime($_GET["dateFin"])),date("Y",strtotime($_GET["dateFin"]))));
 $capteurChoisi=explode(",",$_GET["capteurChoisi"]);
 
-
+//afficher les données sur navigateur
 $fp = fopen('php://output', 'a');
 
+//en-tête du fichier csv
 $head = array('Temps');
 foreach ($capteurChoisi as $uncapteur){
    array_push($head,$uncapteur);
@@ -25,14 +24,21 @@ fputcsv($fp, $head);
 
 // count
 $cnt = 0;
-//afficher 100000 ligne sur buffer chaque fois
+//on limite que chaque fois, il y a que 100000 lignes dans le buffer
 $limit = 100000;
 
+// on calcule les sommes de consommation selon les capteurs choisies et les écrit sur le fichier 
 $dateActuelle=$dateDebut;
 while(strtotime($dateActuelle)<=strtotime($dateFin)){
+	
+	// une ligne dans le ficher
 	unset($row);
 	$row=array();
+	
+	// le temps de la ligne de donnée
 	array_push($row,date("d-m-Y H\H",strtotime($dateActuelle)));
+	
+	// Pour chaque capteur choisi, push la somme de consommation dans la ligne
 	foreach ($capteurChoisi as $uncapteur)
 		{
 		    switch($uncapteur){
@@ -65,9 +71,19 @@ while(strtotime($dateActuelle)<=strtotime($dateFin)){
 
 			break;
 		}
-		}
-	$dateActuelle=date("d-m-Y H:i:s",strtotime($dateActuelle.'+1 hour'));
-		fputcsv($fp, $row);
 	}
+	
+	$dateActuelle=date("d-m-Y H:i:s",strtotime($dateActuelle.'+1 hour'));
+	
+	// count le ligne, si les lignes dans le buffer est 100000, on rafraîchit le buffer
+	$cnt ++;
+    if ($limit == $cnt) { 
+        ob_flush();
+        flush();
+        $cnt = 0;
+    }
+	
+	fputcsv($fp, $row);
+}
 
 ?>
