@@ -1,5 +1,25 @@
-
+window.onload = function(){
+	new JsDatePick({
+		useMode:2,
+		target:"calendarDateDebut",
+		dateFormat:"%d-%m-%Y"
+	});
+	new JsDatePick({
+		useMode:2,
+		target:"calendarDateFin",
+		dateFormat:"%d-%m-%Y"
+	});
+	$("#hide").hide();
+	$("#question").hover(function(){
+		$("#hide").show(500);
+	});
+	$("#question").mouseout(function(){
+		$("#hide").hide(500);
+	})
+};
 	
+
+			
 var treeData = 
     [{title: "Total", key: "total", 
       children: [
@@ -47,18 +67,7 @@ var treeData =
 		  }
 		});
 		
-		window.onload = function(){
-			new JsDatePick({
-				useMode:2,
-				target:"calendarDateDebut",
-				dateFormat:"%d-%m-%Y"
-			});
-			new JsDatePick({
-				useMode:2,
-				target:"calendarDateFin",
-				dateFormat:"%d-%m-%Y"
-			});
-		};
+		
 	  });
 	  
    //recuper les options

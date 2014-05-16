@@ -1,0 +1,15 @@
+.box{ 
+	margin:0 auto; 
+	float:left;
+}
+.cacheElem{ 
+	margin : 5px; 
+	padding:10px; 
+	border:1px solid #E4E4E4; 
+	color:#333 
+}
+
+.infoElem{
+	margin-left: 5px; 
+	display: inline-block;
+}
