@@ -138,8 +138,8 @@ var treeData =
 										+'</tr></table>');
 										
 				//donnees invisible pour export
-				$('#graphique').append('<span class="invisible" id="dateDebutChoisi" >'+$('#calendarDateDebut').val()+'</span>');
-				$('#graphique').append('<span class="invisible" id="dateFinChoisi" >'+$('#calendarDateFin').val()+'</span>');
+				$('#graphique').append('<input type="hidden" id="dateDebutChoisi" value="'+$('#calendarDateDebut').val()+'"/>');
+				$('#graphique').append('<input type="hidden" id="dateFinChoisi" value="'+$('#calendarDateFin').val()+'"/>');
 				//bouton export
 				$('#graphique').append('<input name="export" type="button" onclick="exportDonnees();" value="Export" />');
 				
