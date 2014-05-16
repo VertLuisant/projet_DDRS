@@ -27,38 +27,53 @@
 	</head>
 
 	<body>
-	  <form id="form1" name="form1" method="get" action="">
-		  <label for="dateDebut">Date Debut</label>
-		  <div> <input type="text" size="12" id="calendarDateDebut" name="dateDebut" /> </div>
-		  <label for="dateFin">Date Fin</label>
-		  <div> <input type="text" size="12" id="calendarDateFin" /> </div>
-		  <!-- Tree -->
-		  <label for="capteur">Capteur</label>
-		   <div class="box">
+		<h1>Fouille de données sur la consommation électrique bâtiment 31</h1>
+		
+		<form id="form1" name="form1" method="get" action="">
+			<div id="dateDebut"> 
+				<label for="dateDebut">Date Debut</label>
+				<br />
+				<input type="text" size="12" id="calendarDateDebut" />=>
+			</div>
+			
+			<div id="dateFin"> 
+				<label for="dateFin">Date Fin</label>	
+				<br />
+				<input type="text" size="12" id="calendarDateFin" /> 
+			</div>
+		 
+			<div class="aide">
 				<img class="image" id="question" src="design/image/question.png" />
-				<div id="hide">
-				  <p> Total :</p>
-				  <p> Batiment est : </p>
-				  <p> serveur est :</p>
-				  <p> Extension ouest :</p>
-			</div><!--end:hide-->
-			 <div id="tree"> </div>
-		  </div>
-
-		  <label for="labelMoyenne">moyenne</label>
-		  <div>
-		  <select id="moyenne" name="moyenne">
+			</div>
+			<div class="aide" id="hide">
+				<h3>Definitions des capteurs</h3>
+				<p><span class="nomADefinir">Total :</span> Consommation électrique totale du bâtiment 31<br />
+					<span class="nomADefinir marge1">Batiment est :</span> Consommation électrique du bâtiment est<br />
+					<span class="nomADefinir marge2">Serveur est :</span> Consommation électrique des serveur situés au 2ème étage du batiment est<br />
+					<span class="nomADefinir marge1">Extension ouest :</span> Consommation électrique de l'extension ouest (au niveau des salles STX)<br />
+					<span class="nomADefinir marge2">Capteur 1,2,3 :</span> Correspondent aux 3 relevées fait sur l'extension ouest. Nous n'avons pas plus de renseignement quand à leur significations.
+				</p>
+			</div>
+			
+			<label for="labelMoyenne">Granularité moyenne</label>
+			<select id="moyenne" name="moyenne">
 				<option value="Heure">Heure</option>
 				<option value="Jour">Jour</option>
 				<option value="Semaine">Semaine</option>
 				<option value="Mois">Mois</option>
-		   </select>
-		   </div>
-		  <input name="submit" type="button" onclick="javascript:getss();" value="submit" />
+			</select>
+			
+			<!-- arborescence capteur -->
+			<div class="box">			
+				<label for="capteur">Choix des capteurs</label>
+				<div id="listeCapteur"></div>
+			</div>
+			
+			<input name="submit" type="button" onclick="javascript:getss();" value="submit" />
 
-		<div id="module"></div>
-		 
-		 <input name="export" type="button" onclick="exportDonnees();" value="Export" />
-	 </form>
+			<div id="module"></div>
+			 
+			
+		</form>
 	</body>
 </html>

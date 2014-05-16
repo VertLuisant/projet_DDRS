@@ -1,6 +1,16 @@
-.box{ 
-	margin:0 auto; 
+#dateDebut{
 	float:left;
+}
+
+#dateFin{
+}
+
+.aide{
+	float:right;
+}
+
+.box{ 
+	width: 300px;
 }
 .cacheElem{ 
 	margin : 5px; 
@@ -12,4 +22,12 @@
 .infoElem{
 	margin-left: 5px; 
 	display: inline-block;
+}
+
+.marge1{
+	margin-left: 5em;
+}
+
+.marge2{
+	margin-left: 10em;
 }

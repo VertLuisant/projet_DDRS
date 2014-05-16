@@ -16,6 +16,31 @@ window.onload = function(){
 	$("#question").mouseout(function(){
 		$("#hide").hide(500);
 	})
+	
+	//initialize tree
+	$("#listeCapteur").fancytree({
+		  checkbox: true,
+		  selectMode: 2,
+		  source: treeData,
+		  select: function(event, data) {
+			// Get a list of all selected nodes, and convert to a key array:
+			  capteurChoisi = $.map(data.tree.getSelectedNodes(), function(node){
+			  return node.key;
+			});
+		   
+		  },
+		  click: function(event, data) {
+			if( $.ui.fancytree.getEventTargetType(event) === "title" ){
+              data.node.toggleSelected();
+			}
+		  },
+		  keydown: function(event, data) {
+			if( event.which === 32 ) {
+			  data.node.toggleSelected();
+			  return false;
+			}
+		  }
+		});
 };
 	
 
@@ -40,35 +65,6 @@ var treeData =
  ];
  
  var capteurChoisi=[];
- 
-	$(function(){
-		// --- Initialize  tree
-		$("#tree").fancytree({
-		  checkbox: true,
-		  selectMode: 2,
-		  source: treeData,
-		  select: function(event, data) {
-			// Get a list of all selected nodes, and convert to a key array:
-			  capteurChoisi = $.map(data.tree.getSelectedNodes(), function(node){
-			  return node.key;
-			});
-		   
-		  },
-		  click: function(event, data) {
-			if( $.ui.fancytree.getEventTargetType(event) === "title" ){
-              data.node.toggleSelected();
-			}
-		  },
-		  keydown: function(event, data) {
-			if( event.which === 32 ) {
-			  data.node.toggleSelected();
-			  return false;
-			}
-		  }
-		});
-		
-		
-	  });
 	  
    //recuper les options
 	function getss()
@@ -105,6 +101,8 @@ var treeData =
 			var ctx = $('#graphe').get(0).getContext("2d");
 			var chart = new Chart(ctx);
 			new Chart(ctx).Line(dataParse,options);
+			
+			$('#module').append('<input name="export" type="button" onclick="exportDonnees();" value="Export" />');
 		});
 	}
 	
