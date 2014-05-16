@@ -83,11 +83,11 @@ var treeData =
 	  alert("il faut choisir un capteur");
 	 }
 	 var envoiDonnees=$.post("graphe.php",{"dateDebut":dateDebut.getDate()+"-"+(dateDebut.getMonth()+1)+"-"+dateDebut.getFullYear(),"dateFin":dateFin.getDate()+"-"+(dateFin.getMonth()+1)+"-"+dateFin.getFullYear(),"capteur":capteurChoisi,"moyenne":moyenne});
-	 $('#module').html('<img class="image" src="design/loading.gif" />');
+	 $('#graphique').html('<img class="image" src="design/loading.gif" />');
 	 envoiDonnees.done(function(data){
-			//On initialise le contenu de la balise div module
-			$('#module').html('');
-			$('#module').append('<div id="titleGraphe" class="title">Graphe</div>'
+			//On initialise le contenu de la balise div Graphique
+			$('#graphique').html('');
+			$('#graphique').append('<div id="titleGraphe" class="title">Graphe</div>'
 								+ '<canvas id="graphe" width="1360" height="300" ></canvas>');
 			
 			var dataParse = $.parseJSON(data)
@@ -102,7 +102,7 @@ var treeData =
 			var chart = new Chart(ctx);
 			new Chart(ctx).Line(dataParse,options);
 			
-			$('#module').append('<input name="export" type="button" onclick="exportDonnees();" value="Export" />');
+			$('#graphique').append('<input name="export" type="button" onclick="exportDonnees();" value="Export" />');
 		});
 	}
 	
